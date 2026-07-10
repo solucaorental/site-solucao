@@ -8,7 +8,7 @@ import { site } from '../data/site';
 
 <BaseLayout
   title="Contato | Solução Rental"
-  description="Estamos prontos para atender sua solicitação. Peça um orçamento ou tire suas dúvidas."
+  description="Canais de contato e dados institucionais da Solução Rental."
   pathname="/contato"
 >
   <section class="hero">
@@ -16,11 +16,11 @@ import { site } from '../data/site';
       <div class="hero-panel">
         <span class="eyebrow">Contato</span>
         <h1>Fale conosco</h1>
-        <p>Estamos prontos para atender sua solicitação, pedir um orçamento ou esclarecer dúvidas sobre locação, telas e segurança.</p>
+        <p>Entre em contato para solicitar orçamento, confirmar atendimento ou tirar dúvidas sobre locação de equipamentos e serviços da empresa.</p>
       </div>
       <div class="hero-highlight">
-        <h3>Resposta mais rápida</h3>
-        <p>Como não existe mais o antigo `enviar.php`, o formulário agora envia a mensagem diretamente para o WhatsApp com os dados preenchidos.</p>
+        <h3>Canal mais rápido</h3>
+        <p>O formulário abre a conversa no WhatsApp com os dados preenchidos, facilitando o primeiro atendimento.</p>
       </div>
     </div>
   </section>
@@ -31,14 +31,14 @@ import { site } from '../data/site';
         <SectionHeading
           eyebrow="Informações"
           title="Canais diretos de atendimento"
-          text="Escolha o melhor canal para falar com a equipe."
+          text="Confira o telefone provisório informado e os dados institucionais da empresa."
         />
 
         <div class="contact-stack">
           <article class="contact-card">
             <div class="contact-icon"><Icon name="phone" /></div>
             <div>
-              <h3>Telefones</h3>
+              <h3>Telefone e WhatsApp</h3>
               <p>{site.phone}</p>
               <p>{site.whatsappLabel}</p>
             </div>
@@ -47,9 +47,10 @@ import { site } from '../data/site';
           <article class="contact-card">
             <div class="contact-icon"><Icon name="mail" /></div>
             <div>
-              <h3>E-mail</h3>
-              <p>{site.email}</p>
-              <p>{site.salesEmail}</p>
+              <h3>Dados da empresa</h3>
+              <p>{site.legalName}</p>
+              <p>CNPJ {site.cnpj}</p>
+              <p>{site.status} • {site.branchType}</p>
             </div>
           </article>
 
@@ -71,9 +72,9 @@ import { site } from '../data/site';
         </article>
 
         <article class="map-placeholder">
-          <h3>Área de atendimento</h3>
-          <p>Fortaleza e região metropolitana.</p>
-          <p>O espaço foi mantido pronto para um embed de mapa real quando você quiser conectar o endereço definitivo.</p>
+          <h3>Endereço cadastrado</h3>
+          <p>{site.address}</p>
+          <p>Empresa matriz localizada em Fortaleza/CE.</p>
         </article>
       </div>
     </div>

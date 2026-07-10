@@ -9,18 +9,18 @@ import { companyHighlights, equipment, portfolioItems, services, site } from '..
 ---
 
 <BaseLayout
-  title="Solução Rental | Locação, telas fachadeiras e segurança para obras"
+  title="Solução Rental | Locação de equipamentos para construção em Fortaleza"
   description={site.description}
   pathname="/"
 >
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-panel">
-        <span class="eyebrow">Segurança e locação para obras verticais</span>
+        <span class="eyebrow">Locação e apoio para construção</span>
         <h1>{site.name}</h1>
         <p>{site.heroText}</p>
         <p class="hero-note">
-          Há mais de 30 anos atendendo construtoras com mais agilidade comercial, apresentação mais profissional e foco em segurança coletiva.
+          Empresa com CNPJ ativo desde 05/12/2012, sediada em Fortaleza/CE e com foco principal em locação de máquinas e equipamentos para construção.
         </p>
         <div class="hero-actions">
           <a class="btn btn-primary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">
@@ -40,21 +40,21 @@ import { companyHighlights, equipment, portfolioItems, services, site } from '..
 
       <div class="hero-side">
         <div class="hero-highlight">
-          <h3>Soluções completas para sua obra</h3>
-          <p>Locação de equipamentos, venda e instalação de telas e sistemas de segurança em um site mais claro, mais confiável e mais comercial.</p>
+          <h3>Atuação voltada ao setor da construção</h3>
+          <p>Apresentacao institucional destacando locacao de equipamentos, telas fachadeiras e atendimento para obras.</p>
         </div>
         <div class="hero-stack">
           <div class="hero-tile">
-            <strong>Atendimento rápido</strong>
-            <span>Resposta orientada para orçamento e fechamento comercial.</span>
+            <strong>Locação de equipamentos</strong>
+            <span>Atividade econômica principal da empresa para atendimento a obras e operações de campo.</span>
           </div>
           <div class="hero-tile">
-            <strong>Identidade renovada</strong>
-            <span>Visual mais sólido, corporativo e vendável sem perder a essência da marca.</span>
+            <strong>Telas fachadeiras</strong>
+            <span>Atendimento para obras que precisam de telas fachadeiras com contato comercial rapido.</span>
           </div>
           <div class="hero-tile">
-            <strong>Estrutura preparada para crescer</strong>
-            <span>Base em Astro para SEO, performance e manutenção simples.</span>
+            <strong>Base em Fortaleza</strong>
+            <span>Endereço no bairro Mondubim e contato direto por WhatsApp para atendimento inicial.</span>
           </div>
         </div>
       </div>
@@ -65,8 +65,8 @@ import { companyHighlights, equipment, portfolioItems, services, site } from '..
     <div class="container">
       <SectionHeading
         eyebrow="Serviços"
-        title="Nossos serviços"
-        text="Soluções completas para sua obra com segurança, apresentação profissional e suporte comercial ágil."
+        title="Áreas de atuação da empresa"
+        text="Resumo das frentes apresentadas no site, com destaque para locacao de equipamentos e telas fachadeiras."
       />
       <div class="card-grid services-grid">
         {services.map((service) => <ServiceCard {...service} />)}
@@ -78,12 +78,12 @@ import { companyHighlights, equipment, portfolioItems, services, site } from '..
     <div class="container split-section">
       <div class="highlight-surface">
         <span class="eyebrow">Quem somos</span>
-        <h2>Tradição, logística e confiança no canteiro</h2>
+        <h2>Empresa ativa, matriz em Fortaleza e atuação na construção</h2>
         <p>
-          Há mais de 30 anos no mercado, a Solução Rental é referência em segurança e eficiência para obras verticais em Fortaleza e região.
+          A SOLUCAO RENTAL LTDA - ME foi fundada em 05/12/2012 e mantém situação cadastral ativa, com sede em Fortaleza, Ceará.
         </p>
         <p>
-          Com depósito de mais de 8.000m² e equipe capacitada, a empresa atende grandes construtoras e obras de diversos portes com foco em pontualidade e norma técnica.
+          Seu CNAE principal é o aluguel de máquinas e equipamentos para construção sem operador, com atividades secundárias ligadas a manutenção, obras civis e infraestrutura.
         </p>
         <a class="btn btn-primary" href="/quem-somos">Conheça a empresa</a>
       </div>
@@ -104,7 +104,7 @@ import { companyHighlights, equipment, portfolioItems, services, site } from '..
       <SectionHeading
         eyebrow="Locação"
         title="Equipamentos em destaque"
-        text="Catálogo apresentado em cards limpos para facilitar a leitura e a intenção de contato."
+        text="Exemplos de equipamentos alinhados à proposta de locação para construção apresentada no site."
       />
       <div class="equipment-grid">
         {equipment.map((item) => <EquipmentCard {...item} />)}
@@ -118,9 +118,9 @@ import { companyHighlights, equipment, portfolioItems, services, site } from '..
   <section class="section section--compact">
     <div class="container">
       <SectionHeading
-        eyebrow="Portfólio"
-        title="Obras e soluções em destaque"
-        text="Uma vitrine mais forte para provar experiência, gerar confiança e dar contexto real aos serviços."
+        eyebrow="Serviços"
+        title="Frentes de atendimento em destaque"
+        text="Visão resumida das linhas de serviço e apoio operacional que fazem parte da apresentação institucional."
       />
       <div class="portfolio-grid">
         {portfolioItems.slice(0, 3).map((item) => <PortfolioCard {...item} />)}
@@ -132,8 +132,8 @@ import { companyHighlights, equipment, portfolioItems, services, site } from '..
   </section>
 
   <CTASection
-    title="Precisa de equipamentos ou instalação segura para sua obra?"
-    text="Fale com nossos especialistas e solicite um orçamento personalizado com mais rapidez."
+    title="Precisa de locação de equipamentos ou informações sobre atendimento?"
+    text="Fale com a empresa pelo WhatsApp e solicite um contato inicial para orçamento ou esclarecimentos."
     primaryHref="/contato"
     primaryLabel="Solicitar orçamento"
     secondaryHref={`https://wa.me/${site.whatsapp}`}

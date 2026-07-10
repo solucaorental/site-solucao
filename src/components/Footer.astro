@@ -8,13 +8,13 @@ import Icon from './Icon.astro';
     <div class="footer-grid">
       <div>
         <h3>{site.name}</h3>
-        <p>Qualidade, segurança e presença técnica para obras verticais em Fortaleza e região.</p>
+        <p>Locação de equipamentos, manutenção e apoio a obras em Fortaleza e região.</p>
       </div>
 
       <div>
         <h4>Contato</h4>
         <p><Icon name="phone" /> {site.phone}</p>
-        <p><Icon name="mail" /> {site.email}</p>
+        <p><Icon name="pin" /> {site.address}</p>
         <p><Icon name="pin" /> {site.city}</p>
       </div>
 
@@ -29,14 +29,14 @@ import Icon from './Icon.astro';
         </p>
         <div class="social-list">
           <a class="social-pill" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">WhatsApp</a>
-          <a class="social-pill" href={`mailto:${site.email}`}>E-mail</a>
-          <a class="social-pill" href={site.instagram} target="_blank" rel="noreferrer">Instagram</a>
+          {site.email && <a class="social-pill" href={`mailto:${site.email}`}>E-mail</a>}
+          {site.instagram && <a class="social-pill" href={site.instagram} target="_blank" rel="noreferrer">Instagram</a>}
         </div>
       </div>
     </div>
 
     <div class="footer-note">
-      © {new Date().getFullYear()} {site.legalName}. Todos os direitos reservados.
+      © {new Date().getFullYear()} {site.legalName} • CNPJ {site.cnpj}. Todos os direitos reservados.
     </div>
   </div>
 </footer>

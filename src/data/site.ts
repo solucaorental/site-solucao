@@ -28,55 +28,60 @@ export type BlogPost = {
 
 export const site = {
   name: 'Solução Rental',
-  legalName: 'Solução Rental LTDA.',
-  phone: '(85) 3333-3333',
-  whatsapp: '5585999999999',
-  whatsappLabel: '(85) 99999-9999',
-  email: 'contato@solucaorental.com.br',
-  salesEmail: 'comercial@solucaorental.com.br',
-  city: 'Fortaleza, CE',
-  address: 'Av. Exemplo, 1234 - Bairro, Fortaleza - CE, CEP 60000-000',
+  legalName: 'SOLUCAO RENTAL LTDA - ME',
+  phone: '(85) 98889-2958',
+  whatsapp: '5585988892958',
+  whatsappLabel: '(85) 98889-2958',
+  email: '',
+  salesEmail: '',
+  city: 'Fortaleza - CE',
+  address: 'R. Gen. Onofre, 132, Loja 03 - Mondubim, Fortaleza - CE, CEP 60762-170',
   description:
-    'Especialista em locação de equipamentos, telas fachadeiras e sistemas de segurança para obras verticais em Fortaleza.',
+    'Empresa sediada em Fortaleza/CE, com foco em locação de máquinas e equipamentos para construção e fornecimento de telas fachadeiras para obras.',
   heroText:
-    'Construções, equipamentos, telas fachadeiras e sistemas de segurança para obras verticais.',
-  instagram: 'https://instagram.com/riandte'
+    'Locação de máquinas e equipamentos para construção, telas fachadeiras e atendimento para obras em Fortaleza e região.',
+  instagram: '',
+  cnpj: '17.264.015/0001-60',
+  foundationDate: '05/12/2012',
+  status: 'Ativa',
+  legalNature: '206 | Sociedade Empresária Limitada',
+  branchType: 'Matriz'
 };
 
 export const navItems: NavItem[] = [
   { href: '/', label: 'Home' },
   { href: '/locacao', label: 'Locação' },
   { href: '/telas', label: 'Telas' },
-  { href: '/portfolio', label: 'Portfólio' },
+  { href: '/portfolio', label: 'Serviços' },
   { href: '/quem-somos', label: 'Quem Somos' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/blog', label: 'Conteúdo' },
   { href: '/contato', label: 'Contato' }
 ];
 
 export const services: Service[] = [
   {
-    title: 'Venda de Telas',
-    description: 'Telas fachadeiras de alta resistência para proteção de obras e proteção perimetral.',
-    href: '/telas',
+    title: 'Locação de Equipamentos',
+    description: 'Atividade principal da empresa, com foco em máquinas e equipamentos para construção sem operador.',
+    href: '/locacao',
     icon: 'grid'
   },
   {
-    title: 'Instalação de Telas',
-    description: 'Equipe especializada para instalação segura, rápida e alinhada às normas de obra.',
+    title: 'Telas Fachadeiras',
+    description: 'Fornecimento de telas fachadeiras para obras, com foco em proteção e organização do canteiro.',
     href: '/telas',
+    icon: 'shield'
+  },
+  {
+    title: 'Manutenção de Equipamentos',
+    description: 'Serviços de manutenção e reparação de máquinas e equipamentos de terraplenagem, pavimentação e construção.',
+    href: '/portfolio',
     icon: 'tools'
   },
   {
-    title: 'Locação de Equipamentos',
-    description: 'Equipamentos para construção civil com manutenção em dia e suporte comercial ágil.',
-    href: '/locacao',
+    title: 'Atendimento para Obras',
+    description: 'Apoio comercial para locação, telas fachadeiras e demandas operacionais em Fortaleza e região.',
+    href: '/contato',
     icon: 'truck'
-  },
-  {
-    title: 'Instalação de SLQA',
-    description: 'Sistemas limitadores de queda de altura para reforçar a segurança coletiva do canteiro.',
-    href: '/telas',
-    icon: 'shield'
   }
 ];
 
@@ -116,67 +121,67 @@ export const equipment: Equipment[] = [
 ];
 
 export const portfolioItems: PortfolioItem[] = [
-  { title: 'Fachada Magis', subtitle: 'Instalação completa de telas fachadeiras.' },
-  { title: 'Fachada Simpex', subtitle: 'Sistema SLQA e proteção periférica.' },
-  { title: 'Fachada Diagonal', subtitle: 'Locação de andaimes e escoras.' },
-  { title: 'Residencial Meireles', subtitle: 'Proteção de fachada e bandeja.' },
-  { title: 'Centro Comercial Sul', subtitle: 'Locação de betoneiras e equipamentos.' },
-  { title: 'Complexo Industrial', subtitle: 'Linha de vida e segurança.' }
+  { title: 'Locação para Construção', subtitle: 'Máquinas e equipamentos para obras e operações de apoio no canteiro.' },
+  { title: 'Manutenção Técnica', subtitle: 'Reparação de equipamentos de terraplenagem, pavimentação e construção.' },
+  { title: 'Construção de Edifícios', subtitle: 'Atuação complementar em obras civis e execução de estruturas.' },
+  { title: 'Rodovias e Ferrovias', subtitle: 'Serviços ligados à construção e apoio em infraestrutura viária.' },
+  { title: 'Urbanização', subtitle: 'Atendimento para ruas, praças, calçadas e instalações correlatas.' },
+  { title: 'Estruturas Metálicas', subtitle: 'Montagem e apoio para frentes de obra com demanda estrutural.' }
 ];
 
 export const blogPosts: BlogPost[] = [
   {
-    date: '12 Dez 2024',
-    title: 'A importância da NR-18 para obras verticais',
-    excerpt: 'Entenda como as normas regulamentadoras ajudam a reduzir acidentes e reforçam a rotina de segurança.'
+    date: '10 Jul 2026',
+    title: 'Quando vale mais a pena alugar equipamentos para construção',
+    excerpt: 'Uma visão prática sobre disponibilidade, custo operacional e agilidade para obras de diferentes portes.'
   },
   {
-    date: '05 Nov 2024',
-    title: 'Telas Fachadeiras: segurança ou estética?',
-    excerpt: 'Veja como as telas fachadeiras unem proteção contra detritos e melhor apresentação do canteiro.'
+    date: '10 Jul 2026',
+    title: 'Por que manutenção de equipamentos impacta o ritmo da obra',
+    excerpt: 'Entenda como a manutenção correta ajuda a reduzir paradas e melhora a previsibilidade operacional.'
   },
   {
-    date: '20 Out 2024',
-    title: 'Locação x compra de equipamentos',
-    excerpt: 'Uma leitura prática sobre custo-benefício, prazo de obra e ganho operacional na locação.'
+    date: '10 Jul 2026',
+    title: 'Serviços complementares que apoiam operações de construção',
+    excerpt: 'Da locação à infraestrutura, veja como frentes integradas podem dar mais fluidez ao andamento da obra.'
   }
 ];
 
 export const companyHighlights = [
-  { value: '+30', label: 'Anos de experiência' },
-  { value: '+8.000m²', label: 'De depósito e logística' },
-  { value: '100%', label: 'Compromisso com segurança' }
+  { value: 'Desde 2012', label: 'Fundação da empresa' },
+  { value: 'CNPJ Ativo', label: 'Situação cadastral' },
+  { value: 'Fortaleza/CE', label: 'Sede da matriz' }
 ];
 
 export const telasFeatures = [
-  'Alta resistência a impactos',
-  'Proteção UV',
-  'Instalação por equipe qualificada',
-  'Diversas medidas e malhas'
+  'Aplicacao em fachadas de obras e areas de protecao',
+  'Material pensado para uso em canteiros e ambientes externos',
+  'Atendimento para diferentes etapas e portes de obra',
+  'Solicitacao de informacoes e orcamento por WhatsApp'
 ];
 
-export const slqaFeatures = [
-  'Estruturas metálicas robustas',
-  'Redes de segurança certificadas',
-  'Montagem e desmontagem inclusas',
-  'Manutenção periódica'
+export const telasBenefits = [
+  'Protecao visual e organizacao do ambiente de obra',
+  'Aplicacao em fachadas com foco em apoio ao canteiro',
+  'Atendimento local em Fortaleza e regiao',
+  'Canal direto para consulta comercial e disponibilidade'
 ];
 
 export const diferenciais = [
   {
-    title: 'Normas Técnicas',
-    description: 'Todos os serviços seguem rigorosamente a NR-18 e a NR-35.'
+    title: 'Empresa Ativa',
+    description: 'Cadastro ativo e operação formalizada com base em Fortaleza, no Ceará.'
   },
   {
-    title: 'Equipe Capacitada',
-    description: 'Profissionais treinados e experientes em trabalho em altura.'
+    title: 'Base Local',
+    description: 'Atendimento com presença na capital cearense, facilitando contato e operação regional.'
   },
   {
-    title: 'Qualidade',
-    description: 'Materiais de primeira linha para garantir durabilidade e confiança.'
+    title: 'Atuação Diversificada',
+    description: 'Combina locação de equipamentos, manutenção e frentes complementares de construção.'
   },
   {
-    title: 'Agilidade',
-    description: 'Atendimento rápido e comprometido com o cronograma da obra.'
+    title: 'Contato Direto',
+    description: 'Canal rápido por WhatsApp para pedidos de informação e orçamento inicial.'
   }
 ];

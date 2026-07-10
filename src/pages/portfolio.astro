@@ -7,20 +7,20 @@ import { portfolioItems, site } from '../data/site';
 ---
 
 <BaseLayout
-  title="Portfólio | Solução Rental"
-  description="Confira algumas das grandes obras que contaram com a parceria da Solução Rental."
+  title="Serviços | Solução Rental"
+  description="Visão resumida das linhas de serviço e atuação da Solução Rental."
   pathname="/portfolio"
 >
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-panel">
-        <span class="eyebrow">Portfólio</span>
-        <h1>Obras que contaram com nossa parceria</h1>
-        <p>A página de portfólio foi reorganizada para valorizar prova social e deixar a experiência mais elegante e confiável.</p>
+        <span class="eyebrow">Serviços</span>
+        <h1>Frentes de serviço apresentadas no site</h1>
+        <p>Em vez de listar obras específicas sem base confirmada, esta seção apresenta as linhas de serviço associadas à empresa.</p>
       </div>
       <div class="highlight-surface">
-        <h3>Apresentação comercial mais forte</h3>
-        <p>Mesmo sem fotos reais no acervo enviado, a estrutura foi preparada para receber imagens reais futuramente sem retrabalho.</p>
+        <h3>Apresentação institucional</h3>
+        <p>A estrutura foi ajustada para comunicar locação, manutenção e apoio à construção com mais clareza.</p>
       </div>
     </div>
   </section>
@@ -28,9 +28,9 @@ import { portfolioItems, site } from '../data/site';
   <section class="section">
     <div class="container">
       <SectionHeading
-        eyebrow="Cases"
-        title="Nosso portfólio"
-        text="Confira algumas das grandes obras que contaram com a nossa parceria."
+        eyebrow="Linhas de serviço"
+        title="Onde a empresa atua"
+        text="Resumo de serviços com base nas atividades informadas para a Solução Rental."
       />
       <div class="portfolio-grid">
         {portfolioItems.map((item) => <PortfolioCard {...item} />)}
@@ -39,8 +39,8 @@ import { portfolioItems, site } from '../data/site';
   </section>
 
   <CTASection
-    title="Quer uma solução parecida para a sua obra?"
-    text="Converse com a equipe e receba uma proposta alinhada ao tipo de instalação ou locação que você precisa."
+    title="Precisa de atendimento para sua obra ou operação?"
+    text="Converse com a empresa e alinhe o tipo de serviço ou locação que você precisa."
     primaryHref="/contato"
     primaryLabel="Solicitar proposta"
     secondaryHref={`https://wa.me/${site.whatsapp}`}

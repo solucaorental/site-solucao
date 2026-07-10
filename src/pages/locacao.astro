@@ -8,15 +8,15 @@ import { equipment, site } from '../data/site';
 
 <BaseLayout
   title="Locação de Equipamentos | Solução Rental"
-  description="Os melhores equipamentos para sua obra com manutenção em dia e entrega rápida."
+  description="Locação de máquinas e equipamentos para construção em Fortaleza e região."
   pathname="/locacao"
 >
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-panel">
         <span class="eyebrow">Locação de equipamentos</span>
-        <h1>Os melhores equipamentos para sua obra</h1>
-        <p>Manutenção em dia, apresentação organizada do catálogo e caminho curto para pedir orçamento.</p>
+        <h1>Locação para obras e operações de construção</h1>
+        <p>A atividade principal da empresa é o aluguel de máquinas e equipamentos para construção sem operador.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="/contato">Pedir orçamento</a>
           <a class="btn btn-secondary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">Falar com a equipe</a>
@@ -24,8 +24,8 @@ import { equipment, site } from '../data/site';
       </div>
       <div class="highlight-surface">
         <h3>Catálogo de equipamentos</h3>
-        <p>Confira nossa lista completa de equipamentos disponíveis para locação.</p>
-        <p>Esse conteúdo foi reorganizado em uma vitrine mais clara, mais comercial e com leitura muito melhor no mobile.</p>
+        <p>Confira exemplos de equipamentos compatíveis com a proposta de locação apresentada pela empresa.</p>
+        <p>O objetivo desta página é facilitar a leitura do catálogo e o pedido inicial de orçamento.</p>
       </div>
     </div>
   </section>
@@ -35,7 +35,7 @@ import { equipment, site } from '../data/site';
       <SectionHeading
         eyebrow="Catálogo"
         title="Equipamentos disponíveis"
-        text="Da estrutura metálica ao acabamento, a página agora valoriza os itens com mais hierarquia visual."
+        text="Itens apresentados de forma objetiva para apoiar consultas comerciais e pedidos de disponibilidade."
       />
       <div class="equipment-grid">
         {equipment.map((item) => <EquipmentCard {...item} />)}
@@ -45,7 +45,7 @@ import { equipment, site } from '../data/site';
 
   <CTASection
     title="Quer confirmar disponibilidade ou prazo de entrega?"
-    text="Nossa equipe pode orientar a melhor solução para a sua obra e enviar um orçamento rápido."
+    text="Nossa equipe pode orientar o atendimento inicial e registrar sua solicitação por WhatsApp."
     primaryHref="/contato"
     primaryLabel="Solicitar orçamento"
     secondaryHref={`https://wa.me/${site.whatsapp}`}
