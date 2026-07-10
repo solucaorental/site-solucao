@@ -1,0 +1,32 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  text: string;
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const { title, text, primaryHref, primaryLabel, secondaryHref, secondaryLabel } = Astro.props;
+---
+
+<section class="section section--compact">
+  <div class="container">
+    <div class="cta">
+      <h2>{title}</h2>
+      <p>{text}</p>
+      <div class="cta-actions">
+        <a class="btn btn-light" href={primaryHref}>
+          {primaryLabel}
+          <Icon name="arrow" />
+        </a>
+        {secondaryHref && secondaryLabel && (
+          <a class="btn btn-secondary" href={secondaryHref}>{secondaryLabel}</a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

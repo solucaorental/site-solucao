@@ -1,0 +1,25 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+---
+
+<a
+  class="floating-whatsapp"
+  href={`https://wa.me/${site.whatsapp}`}
+  target="_blank"
+  rel="noreferrer"
+  aria-label="Falar no WhatsApp"
+>
+  <Icon name="whatsapp" />
+</a>
+
+<script>
+  const button = document.querySelector<HTMLElement>('.floating-whatsapp');
+  if (button) {
+    setInterval(() => {
+      button.classList.remove('pulse');
+      void button.offsetWidth;
+      button.classList.add('pulse');
+    }, 3500);
+  }
+</script>

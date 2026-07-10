@@ -1,0 +1,48 @@
+---
+import { site } from '../data/site';
+---
+
+<form class="contact-form" id="contact-form">
+  <div class="field">
+    <label for="nome">Nome completo</label>
+    <input id="nome" name="nome" type="text" required />
+  </div>
+  <div class="field">
+    <label for="email">E-mail</label>
+    <input id="email" name="email" type="email" required />
+  </div>
+  <div class="field">
+    <label for="telefone">Telefone / WhatsApp</label>
+    <input id="telefone" name="telefone" type="tel" required />
+  </div>
+  <div class="field">
+    <label for="mensagem">Mensagem / Equipamento de interesse</label>
+    <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Enviar pelo WhatsApp</button>
+</form>
+
+<script is:inline define:vars={{ whatsapp: site.whatsapp }}>
+  const form = document.getElementById('contact-form');
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const nome = String(formData.get('nome') || '');
+    const email = String(formData.get('email') || '');
+    const telefone = String(formData.get('telefone') || '');
+    const mensagem = String(formData.get('mensagem') || '');
+
+    const text = [
+      'Olá, vim pelo site da Solução Rental.',
+      '',
+      `Nome: ${nome}`,
+      `E-mail: ${email}`,
+      `Telefone: ${telefone}`,
+      `Mensagem: ${mensagem}`
+    ].join('\n');
+
+    window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+  });
+</script>

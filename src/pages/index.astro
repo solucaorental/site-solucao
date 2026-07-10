@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import EquipmentCard from '../components/EquipmentCard.astro';
+import PortfolioCard from '../components/PortfolioCard.astro';
+import CTASection from '../components/CTASection.astro';
+import { companyHighlights, equipment, portfolioItems, services, site } from '../data/site';
+---
+
+<BaseLayout
+  title="Solução Rental | Locação, telas fachadeiras e segurança para obras"
+  description={site.description}
+  pathname="/"
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-panel">
+        <span class="eyebrow">Segurança e locação para obras verticais</span>
+        <h1>{site.name}</h1>
+        <p>{site.heroText}</p>
+        <p class="hero-note">
+          Há mais de 30 anos atendendo construtoras com mais agilidade comercial, apresentação mais profissional e foco em segurança coletiva.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">
+            Falar no WhatsApp
+          </a>
+          <a class="btn btn-secondary" href="/contato">Solicitar orçamento</a>
+        </div>
+        <div class="hero-metrics">
+          {companyHighlights.map((item) => (
+            <div class="metric-card">
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="hero-highlight">
+          <h3>Soluções completas para sua obra</h3>
+          <p>Locação de equipamentos, venda e instalação de telas e sistemas de segurança em um site mais claro, mais confiável e mais comercial.</p>
+        </div>
+        <div class="hero-stack">
+          <div class="hero-tile">
+            <strong>Atendimento rápido</strong>
+            <span>Resposta orientada para orçamento e fechamento comercial.</span>
+          </div>
+          <div class="hero-tile">
+            <strong>Identidade renovada</strong>
+            <span>Visual mais sólido, corporativo e vendável sem perder a essência da marca.</span>
+          </div>
+          <div class="hero-tile">
+            <strong>Estrutura preparada para crescer</strong>
+            <span>Base em Astro para SEO, performance e manutenção simples.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Serviços"
+        title="Nossos serviços"
+        text="Soluções completas para sua obra com segurança, apresentação profissional e suporte comercial ágil."
+      />
+      <div class="card-grid services-grid">
+        {services.map((service) => <ServiceCard {...service} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--compact">
+    <div class="container split-section">
+      <div class="highlight-surface">
+        <span class="eyebrow">Quem somos</span>
+        <h2>Tradição, logística e confiança no canteiro</h2>
+        <p>
+          Há mais de 30 anos no mercado, a Solução Rental é referência em segurança e eficiência para obras verticais em Fortaleza e região.
+        </p>
+        <p>
+          Com depósito de mais de 8.000m² e equipe capacitada, a empresa atende grandes construtoras e obras de diversos portes com foco em pontualidade e norma técnica.
+        </p>
+        <a class="btn btn-primary" href="/quem-somos">Conheça a empresa</a>
+      </div>
+
+      <div class="stats-grid">
+        {companyHighlights.map((item) => (
+          <div class="stat-card">
+            <strong>{item.value}</strong>
+            <span>{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Locação"
+        title="Equipamentos em destaque"
+        text="Catálogo apresentado em cards limpos para facilitar a leitura e a intenção de contato."
+      />
+      <div class="equipment-grid">
+        {equipment.map((item) => <EquipmentCard {...item} />)}
+      </div>
+      <div class="hero-actions hero-actions--center">
+        <a class="btn btn-primary" href="/locacao">Ver todos os equipamentos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--compact">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Portfólio"
+        title="Obras e soluções em destaque"
+        text="Uma vitrine mais forte para provar experiência, gerar confiança e dar contexto real aos serviços."
+      />
+      <div class="portfolio-grid">
+        {portfolioItems.slice(0, 3).map((item) => <PortfolioCard {...item} />)}
+      </div>
+      <div class="hero-actions hero-actions--center">
+        <a class="btn btn-primary" href="/portfolio">Ver portfólio completo</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Precisa de equipamentos ou instalação segura para sua obra?"
+    text="Fale com nossos especialistas e solicite um orçamento personalizado com mais rapidez."
+    primaryHref="/contato"
+    primaryLabel="Solicitar orçamento"
+    secondaryHref={`https://wa.me/${site.whatsapp}`}
+    secondaryLabel="Chamar no WhatsApp"
+  />
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import BlogCard from '../components/BlogCard.astro';
+import CTASection from '../components/CTASection.astro';
+import { blogPosts, site } from '../data/site';
+---
+
+<BaseLayout
+  title="Blog | Solução Rental"
+  description="Conteúdo especializado sobre segurança e eficiência na construção civil."
+  pathname="/blog"
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-panel">
+        <span class="eyebrow">Blog</span>
+        <h1>Conteúdo especializado sobre segurança e eficiência</h1>
+        <p>Recriamos a área de conteúdo com aparência editorial mais limpa e preparada para expansão futura em Astro.</p>
+      </div>
+      <div class="highlight-surface">
+        <h3>Base pronta para crescer</h3>
+        <p>Hoje a página mostra os artigos institucionais atuais, mas a estrutura já facilita evoluir para coleção de conteúdo depois.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Conteúdo"
+        title="Leituras em destaque"
+        text="Assuntos que ajudam clientes e parceiros a tomar decisões melhores em segurança e locação."
+      />
+      <div class="blog-grid">
+        {blogPosts.map((post) => <BlogCard {...post} />)}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Quer atendimento direto em vez de continuar pesquisando?"
+    text="A equipe comercial pode orientar rapidamente qual equipamento, sistema ou instalação faz mais sentido para sua obra."
+    primaryHref="/contato"
+    primaryLabel="Pedir atendimento"
+    secondaryHref={`https://wa.me/${site.whatsapp}`}
+    secondaryLabel="WhatsApp"
+  />
+</BaseLayout>

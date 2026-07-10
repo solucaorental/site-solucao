@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CTASection from '../components/CTASection.astro';
+import { diferenciais, site, slqaFeatures, telasFeatures } from '../data/site';
+---
+
+<BaseLayout
+  title="Telas Fachadeiras e SLQA | Solução Rental"
+  description="Proteção completa para obras verticais com telas fachadeiras e sistema limitador de queda de altura."
+  pathname="/telas"
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-panel">
+        <span class="eyebrow">Telas e segurança</span>
+        <h1>Telas fachadeiras e sistemas de segurança</h1>
+        <p>Proteção completa para obras verticais, com argumento técnico mais claro e apresentação muito mais profissional.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/contato">Solicitar orçamento</a>
+          <a class="btn btn-secondary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">Falar no WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-highlight">
+        <h3>Segurança coletiva em evidência</h3>
+        <p>A página reforça conformidade, equipe qualificada e agilidade, que são os pontos mais importantes para a decisão de compra.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--compact">
+    <div class="container split-section">
+      <div class="feature-card">
+        <span class="eyebrow">Telas fachadeiras</span>
+        <h2>Venda e instalação</h2>
+        <p>Oferecemos telas de alta densidade para proteção do entorno da obra, ajudando a evitar a queda de materiais e detritos.</p>
+        <ul class="feature-list">
+          {telasFeatures.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <span class="eyebrow">SLQA</span>
+        <h2>Sistema limitador de queda de altura</h2>
+        <p>Também conhecido como bandejão, o SLQA é essencial para reforçar a segurança de trabalhadores e pedestres.</p>
+        <ul class="feature-list">
+          {slqaFeatures.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Diferenciais"
+        title="Por que escolher a Solução?"
+        text="Reorganizamos a proposta de valor em blocos mais claros para apoiar a decisão comercial."
+      />
+      <div class="feature-grid">
+        {diferenciais.map((item) => (
+          <article class="feature-card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Precisa de proteção de fachada ou bandejão?"
+    text="Envie sua necessidade e a equipe retorna com a solução mais adequada para o porte da obra."
+    primaryHref="/contato"
+    primaryLabel="Falar com especialista"
+    secondaryHref={`https://wa.me/${site.whatsapp}`}
+    secondaryLabel="WhatsApp"
+  />
+</BaseLayout>

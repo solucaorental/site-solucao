@@ -1,0 +1,42 @@
+---
+import { navItems, site } from '../data/site';
+import Icon from './Icon.astro';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>{site.name}</h3>
+        <p>Qualidade, segurança e presença técnica para obras verticais em Fortaleza e região.</p>
+      </div>
+
+      <div>
+        <h4>Contato</h4>
+        <p><Icon name="phone" /> {site.phone}</p>
+        <p><Icon name="mail" /> {site.email}</p>
+        <p><Icon name="pin" /> {site.city}</p>
+      </div>
+
+      <div>
+        <h4>Navegação</h4>
+        <p>
+          {navItems.map((item, index) => (
+            <>
+              <a href={item.href}>{item.label}</a>{index < navItems.length - 1 ? ' · ' : ''}
+            </>
+          ))}
+        </p>
+        <div class="social-list">
+          <a class="social-pill" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">WhatsApp</a>
+          <a class="social-pill" href={`mailto:${site.email}`}>E-mail</a>
+          <a class="social-pill" href={site.instagram} target="_blank" rel="noreferrer">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      © {new Date().getFullYear()} {site.legalName}. Todos os direitos reservados.
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80">
+  <defs>
+    <style>
+      .text { font-family: 'Inter', 'Montserrat', sans-serif; font-weight: 800; }
+      .solucao { fill: #F1742D; }
+      .rental { fill: #333333; }
+    </style>
+  </defs>
+  <text x="10" y="55" class="text solucao" font-size="40">SOLUÇÃO</text>
+  <text x="205" y="55" class="text rental" font-size="40">RENTAL</text>
+  <rect x="10" y="65" width="290" height="4" fill="#F1742D" />
+</svg>

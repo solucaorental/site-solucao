@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import EquipmentCard from '../components/EquipmentCard.astro';
+import CTASection from '../components/CTASection.astro';
+import { equipment, site } from '../data/site';
+---
+
+<BaseLayout
+  title="Locação de Equipamentos | Solução Rental"
+  description="Os melhores equipamentos para sua obra com manutenção em dia e entrega rápida."
+  pathname="/locacao"
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-panel">
+        <span class="eyebrow">Locação de equipamentos</span>
+        <h1>Os melhores equipamentos para sua obra</h1>
+        <p>Manutenção em dia, apresentação organizada do catálogo e caminho curto para pedir orçamento.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/contato">Pedir orçamento</a>
+          <a class="btn btn-secondary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">Falar com a equipe</a>
+        </div>
+      </div>
+      <div class="highlight-surface">
+        <h3>Catálogo de equipamentos</h3>
+        <p>Confira nossa lista completa de equipamentos disponíveis para locação.</p>
+        <p>Esse conteúdo foi reorganizado em uma vitrine mais clara, mais comercial e com leitura muito melhor no mobile.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Catálogo"
+        title="Equipamentos disponíveis"
+        text="Da estrutura metálica ao acabamento, a página agora valoriza os itens com mais hierarquia visual."
+      />
+      <div class="equipment-grid">
+        {equipment.map((item) => <EquipmentCard {...item} />)}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Quer confirmar disponibilidade ou prazo de entrega?"
+    text="Nossa equipe pode orientar a melhor solução para a sua obra e enviar um orçamento rápido."
+    primaryHref="/contato"
+    primaryLabel="Solicitar orçamento"
+    secondaryHref={`https://wa.me/${site.whatsapp}`}
+    secondaryLabel="Abrir WhatsApp"
+  />
+</BaseLayout>

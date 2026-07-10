@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+import { navItems, site } from '../data/site';
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">
+      <img src="/images/logo.svg" alt={site.name} width="44" height="44" />
+      <span>
+        {site.name}
+        <small>Locação e segurança</small>
+      </span>
+    </a>
+
+    <div class="nav-wrap">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span class="nav-toggle-open"><Icon name="menu" /></span>
+        <span class="nav-toggle-close" hidden><Icon name="close" /></span>
+        <span class="sr-only">Abrir menu</span>
+      </button>
+
+      <nav id="main-nav" class="nav-menu" aria-label="Menu principal">
+        {navItems.map((item) => (
+          <a class:list={['nav-link', pathname === item.href && 'is-active']} href={item.href}>
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <a class="btn btn-whatsapp header-cta" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">
+        <Icon name="whatsapp" />
+        Orçamento
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const menu = document.querySelector<HTMLElement>('.nav-menu');
+  const openIcon = document.querySelector<HTMLElement>('.nav-toggle-open');
+  const closeIcon = document.querySelector<HTMLElement>('.nav-toggle-close');
+
+  const syncMenu = (expanded: boolean) => {
+    if (!toggle || !menu || !openIcon || !closeIcon) return;
+    toggle.setAttribute('aria-expanded', String(expanded));
+    menu.classList.toggle('is-open', expanded);
+    openIcon.hidden = expanded;
+    closeIcon.hidden = !expanded;
+  };
+
+  syncMenu(false);
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    syncMenu(!isOpen);
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => syncMenu(false));
+  });
+</script>
