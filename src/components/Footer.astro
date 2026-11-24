@@ -1,42 +1,53 @@
 ---
 import { navItems, site } from '../data/site';
-import Icon from './Icon.astro';
+
+const devHref =
+  site.developer?.whatsapp
+    ? `https://wa.me/${site.developer.whatsapp}?text=${encodeURIComponent(site.developer.whatsappMessage || '')}`
+    : '#';
 ---
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h3>{site.name}</h3>
-        <p>Locação de equipamentos, manutenção e apoio a obras em Fortaleza e região.</p>
-      </div>
-
-      <div>
-        <h4>Contato</h4>
-        <p><Icon name="phone" /> {site.phone}</p>
-        <p><Icon name="pin" /> {site.address}</p>
-        <p><Icon name="pin" /> {site.city}</p>
-      </div>
-
-      <div>
-        <h4>Navegação</h4>
-        <p>
-          {navItems.map((item, index) => (
-            <>
-              <a href={item.href}>{item.label}</a>{index < navItems.length - 1 ? ' · ' : ''}
-            </>
-          ))}
-        </p>
-        <div class="social-list">
-          <a class="social-pill" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">WhatsApp</a>
-          {site.email && <a class="social-pill" href={`mailto:${site.email}`}>E-mail</a>}
-          {site.instagram && <a class="social-pill" href={site.instagram} target="_blank" rel="noreferrer">Instagram</a>}
-        </div>
-      </div>
+<footer class="site-footer" id="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt={site.name} width="720" height="246" loading="lazy" />
+      <p>Locação de equipamentos, telas fachadeiras e apoio a obras em Fortaleza e região.</p>
     </div>
 
-    <div class="footer-note">
-      © {new Date().getFullYear()} {site.legalName} • CNPJ {site.cnpj}. Todos os direitos reservados.
+    <div>
+      <h2>Contato</h2>
+      <ul class="plain-list">
+        <li><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">WhatsApp {site.whatsappLabel}</a></li>
+        {site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}
+        {site.salesEmail && <li><a href={`mailto:${site.salesEmail}`}>{site.salesEmail}</a></li>}
+        {site.instagram && <li><a href={site.instagram} target="_blank" rel="noreferrer">Instagram</a></li>}
+        <li>{site.address}</li>
+      </ul>
     </div>
+
+    <div>
+      <h2>Navegação</h2>
+      <nav class="footer-nav" aria-label="Rodapé">
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </div>
+
+    <div>
+      <h2>Dados da empresa</h2>
+      <ul class="plain-list">
+        <li>{site.legalName}</li>
+        <li>CNPJ {site.cnpj}</li>
+        <li>{site.branchType}, situação {site.status.toLowerCase()}</li>
+        <li>Natureza jurídica {site.legalNature}</li>
+        <li>Fundação em {site.foundationDate}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-note">
+    <span>© {new Date().getFullYear()} {site.legalName}. Todos os direitos reservados.</span>
+    {site.developer?.name && (
+      <span>Desenvolvido por <a href={devHref} target="_blank" rel="noreferrer" title="Falar com o desenvolvedor">{site.developer.name}</a></span>
+    )}
   </div>
 </footer>

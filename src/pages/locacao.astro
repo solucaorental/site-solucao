@@ -1,54 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import EquipmentCard from '../components/EquipmentCard.astro';
+import PageHead from '../components/PageHead.astro';
+import Catalog from '../components/Catalog.astro';
+import Steps from '../components/Steps.astro';
 import CTASection from '../components/CTASection.astro';
-import { equipment, site } from '../data/site';
+import { site } from '../data/site';
 ---
 
 <BaseLayout
   title="Locação de Equipamentos | Solução Rental"
-  description="Locação de máquinas e equipamentos para construção em Fortaleza e região."
+  description="Locação de máquinas e equipamentos para construção civil em Fortaleza e região."
   pathname="/locacao"
 >
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-panel">
-        <span class="eyebrow">Locação de equipamentos</span>
-        <h1>Locação para obras e operações de construção</h1>
-        <p>A atividade principal da empresa é o aluguel de máquinas e equipamentos para construção sem operador.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/contato">Pedir orçamento</a>
-          <a class="btn btn-secondary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">Falar com a equipe</a>
-        </div>
-      </div>
-      <div class="highlight-surface">
-        <h3>Catálogo de equipamentos</h3>
-        <p>Confira exemplos de equipamentos compatíveis com a proposta de locação apresentada pela empresa.</p>
-        <p>O objetivo desta página é facilitar a leitura do catálogo e o pedido inicial de orçamento.</p>
-      </div>
-    </div>
+  <PageHead title="Locação de equipamentos" text="Monte a lista do que sua obra precisa, com quantidade e prazo, e envie o pedido pronto para a equipe." image="/images/andaime.webp" imageAlt="Andaime tubular montado em obra" />
+
+  <section class="section section--catalog" aria-label="Catálogo de equipamentos">
+    <div class="container"><Catalog /></div>
   </section>
 
-  <section class="section">
+  <section class="section section--tint">
     <div class="container">
-      <SectionHeading
-        eyebrow="Catálogo"
-        title="Equipamentos disponíveis"
-        text="Itens apresentados de forma objetiva para apoiar consultas comerciais e pedidos de disponibilidade."
-      />
-      <div class="equipment-grid">
-        {equipment.map((item) => <EquipmentCard {...item} />)}
-      </div>
+      <h2>Como funciona a locação</h2>
+      <Steps />
     </div>
   </section>
 
   <CTASection
-    title="Quer confirmar disponibilidade ou prazo de entrega?"
-    text="Nossa equipe pode orientar o atendimento inicial e registrar sua solicitação por WhatsApp."
+    title="Não encontrou o equipamento?"
+    text="Descreva o serviço que vai executar. A equipe consulta a disponibilidade e orienta a escolha."
     primaryHref="/contato"
     primaryLabel="Solicitar orçamento"
     secondaryHref={`https://wa.me/${site.whatsapp}`}
-    secondaryLabel="Abrir WhatsApp"
+    secondaryLabel="Falar no WhatsApp"
   />
 </BaseLayout>

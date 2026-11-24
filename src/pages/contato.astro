@@ -1,82 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHead from '../components/PageHead.astro';
 import ContactForm from '../components/ContactForm.astro';
-import Icon from '../components/Icon.astro';
-import SectionHeading from '../components/SectionHeading.astro';
 import { site } from '../data/site';
+
+const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`;
 ---
 
 <BaseLayout
   title="Contato | Solução Rental"
-  description="Canais de contato e dados institucionais da Solução Rental."
+  description="Fale com a Solução Rental para solicitar orçamento de locação de equipamentos ou telas fachadeiras em Fortaleza."
   pathname="/contato"
 >
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-panel">
-        <span class="eyebrow">Contato</span>
-        <h1>Fale conosco</h1>
-        <p>Entre em contato para solicitar orçamento, confirmar atendimento ou tirar dúvidas sobre locação de equipamentos e serviços da empresa.</p>
-      </div>
-      <div class="hero-highlight">
-        <h3>Canal mais rápido</h3>
-        <p>O formulário abre a conversa no WhatsApp com os dados preenchidos, facilitando o primeiro atendimento.</p>
-      </div>
-    </div>
-  </section>
+  <PageHead title="Fale com nossa equipe" text="Solicite orçamento, confirme disponibilidade ou tire dúvidas sobre equipamentos e telas fachadeiras." />
 
   <section class="section">
     <div class="container contact-grid">
       <div>
-        <SectionHeading
-          eyebrow="Informações"
-          title="Canais diretos de atendimento"
-          text="Confira o telefone provisório informado e os dados institucionais da empresa."
-        />
-
-        <div class="contact-stack">
-          <article class="contact-card">
-            <div class="contact-icon"><Icon name="phone" /></div>
-            <div>
-              <h3>Telefone e WhatsApp</h3>
-              <p>{site.phone}</p>
-              <p>{site.whatsappLabel}</p>
-            </div>
-          </article>
-
-          <article class="contact-card">
-            <div class="contact-icon"><Icon name="mail" /></div>
-            <div>
-              <h3>Dados da empresa</h3>
-              <p>{site.legalName}</p>
-              <p>CNPJ {site.cnpj}</p>
-              <p>{site.status} • {site.branchType}</p>
-            </div>
-          </article>
-
-          <article class="contact-card">
-            <div class="contact-icon"><Icon name="pin" /></div>
-            <div>
-              <h3>Endereço</h3>
-              <p>{site.address}</p>
-            </div>
-          </article>
-        </div>
+        <h2>Envie sua solicitação</h2>
+        <p>Ao enviar, o WhatsApp abre com a mensagem pronta. Todos os campos são obrigatórios.</p>
+        <ContactForm />
       </div>
-
-      <div class="contact-stack">
-        <article class="info-card">
-          <h3>Envie uma mensagem</h3>
-          <p>Preencha os campos abaixo e vamos abrir a conversa no WhatsApp com tudo organizado.</p>
-          <ContactForm />
-        </article>
-
-        <article class="map-placeholder">
-          <h3>Endereço cadastrado</h3>
-          <p>{site.address}</p>
-          <p>Empresa matriz localizada em Fortaleza/CE.</p>
-        </article>
-      </div>
+      <aside aria-labelledby="canais">
+        <h2 id="canais">Canais diretos</h2>
+        <dl class="facts facts--stacked">
+          <div><dt>WhatsApp</dt><dd><a class="text-link" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">{site.whatsappLabel}</a></dd></div>
+          <div><dt>Telefone</dt><dd><a class="text-link" href={`tel:+${site.whatsapp}`}>{site.phone}</a></dd></div>
+          {site.email && <div><dt>E-mail</dt><dd><a class="text-link" href={`mailto:${site.email}`}>{site.email}</a></dd></div>}
+          <div><dt>Endereço</dt><dd>{site.address}<br /><a class="text-link" href={mapHref} target="_blank" rel="noreferrer">Abrir no mapa</a></dd></div>
+          <div><dt>Empresa</dt><dd>{site.legalName}<br />CNPJ {site.cnpj}<br />{site.branchType}, situação {site.status.toLowerCase()}</dd></div>
+        </dl>
+      </aside>
     </div>
   </section>
 </BaseLayout>

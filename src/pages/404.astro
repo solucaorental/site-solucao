@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHead from '../components/PageHead.astro';
+---
+
+<BaseLayout title="Página não encontrada | Solução Rental" description="A página solicitada não foi encontrada." pathname="/404">
+  <PageHead title="Página não encontrada" text="O endereço pode ter mudado ou sido digitado com erro. Continue pelo catálogo ou fale com a equipe.">
+    <div class="actions">
+      <a class="btn btn-action" href="/locacao">Ver catálogo</a>
+      <a class="btn btn-inverse" href="/contato">Falar com a equipe</a>
+    </div>
+  </PageHead>
+</BaseLayout>

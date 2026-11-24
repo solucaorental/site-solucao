@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+}
+
+// Azul: corpo do equipamento. Laranja (classe "a"): a parte que trabalha.
+const drawings: Record<string, string> = {
+  Andaimes:
+    '<path d="M28 82V10M92 82V10M44 74V6M108 74V6M28 82h-5M28 82h5M92 82h-5M92 82h5M28 60h64M28 30h64M92 60l16-8M92 30l16-8M28 30l16-8h64M28 60l16-8M28 14h64l16-8M28 14l16-8"/><path class="a" d="M28 60l64-30M28 30l64 30M24 32h68l20-10"/>',
+  'Escoras Metálicas':
+    '<path d="M46 84h28M52 84v-4h16v4M56 80V42h8v38M58 34V10h4v24M46 10h28M46 6v4M74 6v4"/><path class="a" d="M54 34h12v8H54zM48 38h24M72 38v5"/><path d="M30 84h8M82 84h8M34 84V10M86 84V10M30 10h8M82 10h8" opacity=".35"/>',
+  Betoneiras:
+    '<path d="M36 84l16-34M84 84L68 50M30 84h60M44 68h32"/><circle cx="32" cy="76" r="8"/><circle cx="88" cy="76" r="8"/><path d="M80 46h16v16H80zM84 51h8M84 56h8"/><path class="a" d="M38 30L64 8l14 6 4 20-18 18-18-4zM38 30l8 18M64 8l18 26M34 25l28-24"/>',
+  'Máquinas de Solda':
+    '<path d="M26 30h50v42H26zM36 30v-8h30v8M34 72v5M68 72v5M60 40h10M60 46h10M60 52h10"/><circle cx="42" cy="44" r="8"/><path d="M42 44l4-5M34 62h4M46 62h4"/><path class="a" d="M50 64c20 14 36 10 38-6l4-18M89 40h7l4-16-5-1zM84 18l-4-5M92 14V8M101 16l5-5"/>',
+  Rosqueadeiras:
+    '<path d="M30 40h50v24H30zM36 64l-8 20M74 64l8 20M34 84h-8M86 84h-8M42 30h24v10M30 52h-8M50 70h20"/><circle cx="80" cy="52" r="13"/><path class="a" d="M22 49h92M22 55h92M100 49v6M104 49v6M108 49v6M112 49v6M114 49v6"/>',
+  'Vibradores para Concreto':
+    '<path d="M16 30h34v22H16zM22 30v-8h22v8M22 52v5M44 52v5M28 36v10M34 36v10M40 36v10"/><path d="M50 41c26-14 46-6 44 18" /><path d="M72 76h42M72 84h42" opacity=".35"/><path class="a" d="M91 58h6v24l-3 4-3-4zM86 66c-3 4-3 8 0 12M102 66c3 4 3 8 0 12"/>',
+  'Martelo Rompedor':
+    '<path d="M48 22h24v30l-4 8H52l-4-8zM32 14h56v8H32zM32 14v8M88 14v8M48 32h24M48 42h24M54 60v6h12v-6"/><path class="a" d="M57 66h6v14l-3 5-3-5z"/><path d="M24 84h26l5-4M70 84h26M66 80l4 4M46 88l-8-4M76 90l6-6"/>',
+  'Perfil Metálico "I"':
+    '<path d="M14 40h32v7H34v27h12v7H14v-7h12V47H14z"/><path class="a" d="M14 40l60-30h32L46 40M46 47l60-30v-7M34 74V47M46 74l60-30v7L46 81M46 74l-12 0M34 67l56-28v-14"/>'
+};
+const shape = drawings[Astro.props.title];
+---
+
+{shape && <svg class="drawing" viewBox="0 0 120 92" aria-hidden="true" set:html={shape} />}

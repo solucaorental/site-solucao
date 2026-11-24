@@ -1,142 +1,84 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import ServiceCard from '../components/ServiceCard.astro';
-import EquipmentCard from '../components/EquipmentCard.astro';
-import PortfolioCard from '../components/PortfolioCard.astro';
 import CTASection from '../components/CTASection.astro';
-import { companyHighlights, equipment, portfolioItems, services, site } from '../data/site';
+import EquipmentDrawing from '../components/EquipmentDrawing.astro';
+import Icon from '../components/Icon.astro';
+import { equipment, portfolioItems, services, site } from '../data/site';
 ---
 
 <BaseLayout
-  title="Solução Rental | Locação de equipamentos para construção em Fortaleza"
+  title="Solução Rental | Locação de equipamentos e telas fachadeiras em Fortaleza"
   description={site.description}
   pathname="/"
 >
   <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-panel">
-        <span class="eyebrow">Locação e apoio para construção</span>
-        <h1>{site.name}</h1>
-        <p>{site.heroText}</p>
-        <p class="hero-note">
-          Empresa com CNPJ ativo desde 05/12/2012, sediada em Fortaleza/CE e com foco principal em locação de máquinas e equipamentos para construção.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">
-            Falar no WhatsApp
-          </a>
-          <a class="btn btn-secondary" href="/contato">Solicitar orçamento</a>
-        </div>
-        <div class="hero-metrics">
-          {companyHighlights.map((item) => (
-            <div class="metric-card">
-              <strong>{item.value}</strong>
-              <span>{item.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div class="hero-side">
-        <div class="hero-highlight">
-          <h3>Atuação voltada ao setor da construção</h3>
-          <p>Apresentacao institucional destacando locacao de equipamentos, telas fachadeiras e atendimento para obras.</p>
-        </div>
-        <div class="hero-stack">
-          <div class="hero-tile">
-            <strong>Locação de equipamentos</strong>
-            <span>Atividade econômica principal da empresa para atendimento a obras e operações de campo.</span>
-          </div>
-          <div class="hero-tile">
-            <strong>Telas fachadeiras</strong>
-            <span>Atendimento para obras que precisam de telas fachadeiras com contato comercial rapido.</span>
-          </div>
-          <div class="hero-tile">
-            <strong>Base em Fortaleza</strong>
-            <span>Endereço no bairro Mondubim e contato direto por WhatsApp para atendimento inicial.</span>
-          </div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <h1>Equipamentos e telas fachadeiras para a sua obra</h1>
+        <p class="lead">A {site.name} aluga máquinas e equipamentos para construção civil e fornece telas fachadeiras em Fortaleza e região desde 2012.</p>
+        <div class="actions">
+          <a class="btn btn-action" href="/contato">Solicitar orçamento</a>
+          <a class="btn btn-inverse" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" />Falar no WhatsApp</a>
         </div>
       </div>
     </div>
+    <div class="hero-media">
+      <img src="/images/andaime.webp" alt="Equipe montando andaime tubular em torno de uma construção de concreto" width="1290" height="768" fetchpriority="high" />
+    </div>
   </section>
 
-  <section class="section">
+  <section class="section" aria-labelledby="servicos">
     <div class="container">
-      <SectionHeading
-        eyebrow="Serviços"
-        title="Áreas de atuação da empresa"
-        text="Resumo das frentes apresentadas no site, com destaque para locacao de equipamentos e telas fachadeiras."
-      />
-      <div class="card-grid services-grid">
-        {services.map((service) => <ServiceCard {...service} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--compact">
-    <div class="container split-section">
-      <div class="highlight-surface">
-        <span class="eyebrow">Quem somos</span>
-        <h2>Empresa ativa, matriz em Fortaleza e atuação na construção</h2>
-        <p>
-          A SOLUCAO RENTAL LTDA - ME foi fundada em 05/12/2012 e mantém situação cadastral ativa, com sede em Fortaleza, Ceará.
-        </p>
-        <p>
-          Seu CNAE principal é o aluguel de máquinas e equipamentos para construção sem operador, com atividades secundárias ligadas a manutenção, obras civis e infraestrutura.
-        </p>
-        <a class="btn btn-primary" href="/quem-somos">Conheça a empresa</a>
-      </div>
-
-      <div class="stats-grid">
-        {companyHighlights.map((item) => (
-          <div class="stat-card">
-            <strong>{item.value}</strong>
-            <span>{item.label}</span>
-          </div>
+      <h2 id="servicos">Soluções para construção civil</h2>
+      <div class="service-list">
+        {services.map((service) => (
+          <a class="service" href={service.href}>
+            <Icon name={service.icon} />
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </a>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <SectionHeading
-        eyebrow="Locação"
-        title="Equipamentos em destaque"
-        text="Exemplos de equipamentos alinhados à proposta de locação para construção apresentada no site."
-      />
-      <div class="equipment-grid">
-        {equipment.map((item) => <EquipmentCard {...item} />)}
+  <section class="section section--tint" aria-labelledby="equipamentos">
+    <div class="container split">
+      <div class="split-intro">
+        <h2 id="equipamentos">Equipamentos para locação</h2>
+        <p>Monte sua lista no catálogo e envie o pedido de orçamento com os itens já preenchidos.</p>
+        <a class="btn btn-primary" href="/locacao">Ver catálogo completo</a>
       </div>
-      <div class="hero-actions hero-actions--center">
-        <a class="btn btn-primary" href="/locacao">Ver todos os equipamentos</a>
-      </div>
+      <dl class="index-list index-list--equipment">
+        {equipment.map((item) => (
+          <div><dt><EquipmentDrawing title={item.title} />{item.title}</dt><dd>{item.description}</dd></div>
+        ))}
+      </dl>
     </div>
   </section>
 
-  <section class="section section--compact">
-    <div class="container">
-      <SectionHeading
-        eyebrow="Serviços"
-        title="Frentes de atendimento em destaque"
-        text="Visão resumida das linhas de serviço e apoio operacional que fazem parte da apresentação institucional."
-      />
-      <div class="portfolio-grid">
-        {portfolioItems.slice(0, 3).map((item) => <PortfolioCard {...item} />)}
-      </div>
-      <div class="hero-actions hero-actions--center">
-        <a class="btn btn-primary" href="/portfolio">Ver portfólio completo</a>
+  <section class="section" aria-labelledby="empresa">
+    <div class="container media-split">
+      <img class="cut" src="/images/escoras.webp" alt="Profissional ajustando escora metálica sob uma laje" width="1190" height="768" loading="lazy" />
+      <div>
+        <h2 id="empresa">Experiência e presença local em Fortaleza</h2>
+        <p>Com sede no bairro Mondubim, a empresa atende construtoras, prestadores de serviços e profissionais do setor com locação de máquinas e equipamentos sem operador.</p>
+        <p><a class="text-link" href="/quem-somos">Conheça a empresa</a></p>
+        <h3 class="sub">Frentes de atendimento</h3>
+        <dl class="compact-list">
+          {portfolioItems.slice(0, 3).map((item) => <div><dt>{item.title}</dt><dd>{item.subtitle}</dd></div>)}
+        </dl>
+        <p><a class="text-link" href="/portfolio">Ver todos os serviços</a></p>
       </div>
     </div>
   </section>
 
   <CTASection
-    title="Precisa de locação de equipamentos ou informações sobre atendimento?"
-    text="Fale com a empresa pelo WhatsApp e solicite um contato inicial para orçamento ou esclarecimentos."
+    title="Precisa de equipamentos ou telas fachadeiras?"
+    text="Fale com nossa equipe e solicite um orçamento sem compromisso."
     primaryHref="/contato"
     primaryLabel="Solicitar orçamento"
     secondaryHref={`https://wa.me/${site.whatsapp}`}
-    secondaryLabel="Chamar no WhatsApp"
+    secondaryLabel="Falar no WhatsApp"
   />
 </BaseLayout>

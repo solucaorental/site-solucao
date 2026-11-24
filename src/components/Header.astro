@@ -11,34 +11,33 @@ const { pathname } = Astro.props;
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/">
-      <img src="/images/logo.svg" alt={site.name} width="44" height="44" />
-      <span>
-        {site.name}
-        <small>Locação e serviços para construção</small>
-      </span>
+    <a class="brand" href="/" aria-label={`${site.name}, página inicial`}>
+      <img src="/images/logo.png" alt="" width="720" height="246" />
     </a>
 
-    <div class="nav-wrap">
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
-        <span class="nav-toggle-open"><Icon name="menu" /></span>
-        <span class="nav-toggle-close" hidden><Icon name="close" /></span>
-        <span class="sr-only">Abrir menu</span>
-      </button>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+      <span class="nav-toggle-open"><Icon name="menu" /></span>
+      <span class="nav-toggle-close" hidden><Icon name="close" /></span>
+      Menu
+    </button>
 
-      <nav id="main-nav" class="nav-menu" aria-label="Menu principal">
-        {navItems.map((item) => (
-          <a class:list={['nav-link', pathname === item.href && 'is-active']} href={item.href}>
-            {item.label}
-          </a>
-        ))}
-      </nav>
+    <nav id="main-nav" class="nav-menu" aria-label="Menu principal">
+      {navItems.map((item) => (
+        <a class="nav-link" aria-current={pathname === item.href ? 'page' : undefined} href={item.href}>{item.label}</a>
+      ))}
+      <div class="menu-extra">
+        <a class="btn btn-action" href="/contato">Solicitar orçamento</a>
+        <a class="btn btn-outline" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" />Falar no WhatsApp</a>
+        <a class="btn btn-outline" href={`tel:+${site.whatsapp}`}><Icon name="phone" />Ligar para {site.phone}</a>
+        <p>{site.address}</p>
+      </div>
+    </nav>
 
-      <a class="btn btn-whatsapp header-cta" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">
-        <Icon name="whatsapp" />
-        Orçamento
-      </a>
-    </div>
+    <a class="header-phone" href={`tel:+${site.whatsapp}`}><Icon name="phone" />{site.phone}</a>
+    <a class="btn btn-action header-cta" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">
+      <Icon name="whatsapp" />
+      Orçamento
+    </a>
   </div>
 </header>
 
@@ -52,18 +51,20 @@ const { pathname } = Astro.props;
     if (!toggle || !menu || !openIcon || !closeIcon) return;
     toggle.setAttribute('aria-expanded', String(expanded));
     menu.classList.toggle('is-open', expanded);
+    document.documentElement.classList.toggle('menu-open', expanded);
     openIcon.hidden = expanded;
     closeIcon.hidden = !expanded;
   };
 
   syncMenu(false);
 
-  toggle?.addEventListener('click', () => {
-    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-    syncMenu(!isOpen);
-  });
-
-  menu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => syncMenu(false));
+  toggle?.addEventListener('click', () => syncMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => syncMenu(false)));
+  window.matchMedia('(min-width: 1001px)').addEventListener('change', () => syncMenu(false));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      syncMenu(false);
+      toggle.focus();
+    }
   });
 </script>

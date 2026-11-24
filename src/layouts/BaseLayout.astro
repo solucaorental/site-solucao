@@ -18,11 +18,14 @@ const canonical = new URL(pathname, Astro.site);
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#1a3c61" />
+    <meta name="theme-color" content="#235d9c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..700&display=swap" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
 
@@ -31,17 +34,18 @@ const canonical = new URL(pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/images/logo.svg', Astro.site)} />
+    <meta property="og:image" content={new URL('/images/og.png', Astro.site)} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL('/images/logo.svg', Astro.site)} />
+    <meta name="twitter:image" content={new URL('/images/og.png', Astro.site)} />
   </head>
   <body>
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
     <div class="page-shell">
       <Header pathname={pathname} />
-      <main>
+      <main id="conteudo" tabindex="-1">
         <slot />
       </main>
       <Footer />

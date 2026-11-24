@@ -1,79 +1,77 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
+import Facade from '../components/Facade.astro';
+import AreaCalculator from '../components/AreaCalculator.astro';
 import CTASection from '../components/CTASection.astro';
 import { diferenciais, site, telasBenefits, telasFeatures } from '../data/site';
 ---
 
 <BaseLayout
   title="Telas Fachadeiras | Solução Rental"
-  description="Telas fachadeiras para obras com atendimento em Fortaleza e regiao."
+  description="Telas fachadeiras para obras em Fortaleza e região com atendimento direto da Solução Rental."
   pathname="/telas"
 >
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-panel">
-        <span class="eyebrow">Telas fachadeiras</span>
+  <section class="screen-hero">
+    <div class="container screen-hero-inner">
+      <div>
         <h1>Telas fachadeiras para obras</h1>
-        <p>Essa area do site apresenta o trabalho da Solucao Rental com telas fachadeiras para canteiros e fachadas de obra.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/contato">Solicitar orçamento</a>
-          <a class="btn btn-secondary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">Falar no WhatsApp</a>
+        <p class="lead">Fornecimento para proteção e organização de canteiros, com atendimento comercial direto em Fortaleza e região.</p>
+        <div class="actions">
+          <a class="btn btn-action" href="#medidas">Calcular área e pedir orçamento</a>
+          <a class="btn btn-outline" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">Falar no WhatsApp</a>
         </div>
       </div>
-      <div class="hero-highlight">
-        <h3>Servico real da empresa</h3>
-        <p>Essa pagina foi ajustada para apresentar somente o atendimento real da empresa com telas fachadeiras.</p>
-      </div>
+      <Facade toggle />
     </div>
   </section>
 
-  <section class="section section--compact">
-    <div class="container split-section">
-      <div class="feature-card">
-        <span class="eyebrow">Aplicacao</span>
-        <h2>Uso de telas fachadeiras na obra</h2>
-        <p>A Solucao Rental trabalha com telas fachadeiras como parte do atendimento voltado ao ambiente de construcao e organizacao do canteiro.</p>
-        <ul class="feature-list">
-          {telasFeatures.map((item) => <li>{item}</li>)}
-        </ul>
+  <section class="section" aria-labelledby="aplicacao">
+    <div class="container split">
+      <div class="split-intro">
+        <h2 id="aplicacao">Como as telas ajudam na obra</h2>
+        <p>São amplamente utilizadas para melhorar a organização visual e a segurança do entorno do canteiro.</p>
       </div>
+      <ul class="check-list">{telasFeatures.map((item) => <li>{item}</li>)}</ul>
+    </div>
+  </section>
 
-      <div class="feature-card">
-        <span class="eyebrow">Atendimento</span>
-        <h2>Como a empresa atende essa demanda</h2>
-        <p>O contato comercial acontece de forma direta, facilitando consulta, alinhamento da necessidade e pedido inicial de orcamento.</p>
-        <ul class="feature-list">
-          {telasBenefits.map((item) => <li>{item}</li>)}
-        </ul>
+  <section class="section section--blue" id="medidas" aria-labelledby="medidas-titulo">
+    <div class="container measure">
+      <div>
+        <h2 id="medidas-titulo">Calcule a área de tela</h2>
+        <p>Com duas medidas, o pedido já chega à equipe com a área estimada da sua obra.</p>
+        <svg class="measure-figure" viewBox="0 0 320 190" role="img" aria-label="Fachada com as duas medidas indicadas: comprimento na base e altura na lateral">
+          <path d="M60 20h240v130H60z" fill="#fff" fill-opacity=".14" stroke="#fff" />
+          <path d="M120 20v130M180 20v130M240 20v130M60 52h240M60 85h240M60 118h240" stroke="#fff" stroke-opacity=".45" />
+          <path d="M60 168h240M60 162v12M300 162v12M42 20v130M36 20h12M36 150h12" stroke="#f79a68" stroke-width="2.5" />
+          <text x="180" y="187" fill="#fff" font-size="14" text-anchor="middle">Comprimento</text>
+          <text x="28" y="85" fill="#fff" font-size="14" text-anchor="middle" transform="rotate(-90 28 85)">Altura</text>
+        </svg>
       </div>
+      <AreaCalculator />
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <SectionHeading
-        eyebrow="Diferenciais"
-        title="Por que falar com a Solucao Rental"
-        text="Resumo de pontos que ajudam a apresentar esse servico com mais clareza no site."
-      />
-      <div class="feature-grid">
-        {diferenciais.map((item) => (
-          <article class="feature-card">
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-          </article>
-        ))}
+    <div class="container two-col">
+      <div>
+        <h2>Como funciona o atendimento</h2>
+        <p>Apresente sua necessidade, tire dúvidas e receba um atendimento personalizado da equipe.</p>
+        <ul class="rule-list">{telasBenefits.map((item) => <li>{item}</li>)}</ul>
+      </div>
+      <div>
+        <h2>Por que contar com a Solução Rental</h2>
+        <dl class="reason-list">{diferenciais.map((item) => <div><dt>{item.title}</dt><dd>{item.description}</dd></div>)}</dl>
       </div>
     </div>
   </section>
 
   <CTASection
     title="Precisa de telas fachadeiras para sua obra?"
-    text="Chame no WhatsApp para tirar duvidas e pedir um orcamento inicial."
-    primaryHref="/contato"
-    primaryLabel="Falar com especialista"
+    text="Chame nossa equipe no WhatsApp para solicitar informações ou pedir um orçamento inicial."
+    primaryHref="/contato?item=Telas%20fachadeiras"
+    primaryLabel="Solicitar orçamento"
     secondaryHref={`https://wa.me/${site.whatsapp}`}
-    secondaryLabel="WhatsApp"
+    secondaryLabel="Falar no WhatsApp"
   />
 </BaseLayout>

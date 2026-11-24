@@ -1,54 +1,47 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
+import PageHead from '../components/PageHead.astro';
 import CTASection from '../components/CTASection.astro';
 import { companyHighlights, site } from '../data/site';
+
+const facts = [
+  ['Razão social', site.legalName],
+  ['CNPJ', site.cnpj],
+  ['Fundação', site.foundationDate],
+  ['Natureza jurídica', site.legalNature],
+  ['Situação', `${site.status}, ${site.branchType.toLowerCase()}`],
+  ['Endereço', site.address]
+];
 ---
 
 <BaseLayout
   title="Quem Somos | Solução Rental"
-  description="Dados institucionais da Solução Rental com base no cadastro da empresa."
+  description="História, atuação e dados institucionais da Solução Rental, empresa de locação de equipamentos em Fortaleza."
   pathname="/quem-somos"
 >
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-panel">
-        <span class="eyebrow">Quem somos</span>
-        <h1>Empresa ativa em Fortaleza com foco em locação para construção</h1>
-        <p>A SOLUCAO RENTAL LTDA - ME foi fundada em 05/12/2012 e atua com locação de máquinas e equipamentos para construção sem operador.</p>
-      </div>
-      <div class="hero-highlight">
-        <h3>Dados principais</h3>
-        <p>CNPJ {site.cnpj}, natureza jurídica de sociedade empresária limitada, matriz localizada em Fortaleza/CE e situação cadastral ativa.</p>
-      </div>
-    </div>
-  </section>
+  <PageHead title="Quem somos" text="Locação de máquinas e equipamentos para construção civil e fornecimento de telas fachadeiras, com sede no bairro Mondubim, em Fortaleza.">
+    <dl class="highlights">
+      {companyHighlights.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
+    </dl>
+  </PageHead>
 
-  <section class="section section--compact">
-    <div class="container split-section">
-      <div class="highlight-surface">
-        <SectionHeading
-          eyebrow="A Solução Rental"
-          title="Atuação principal e atividades complementares"
-          text="O foco central da empresa está na locação de equipamentos para construção, somado a serviços complementares ligados a manutenção, obras civis e infraestrutura."
-        />
-        <p>Entre as atividades secundárias informadas estão manutenção e reparação de equipamentos, construção de edifícios, obras de urbanização, montagem de estruturas metálicas e serviços relacionados a redes de água e esgoto.</p>
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <h2>Foco em locação e telas fachadeiras</h2>
+        <p>A atividade principal da Solução Rental é o aluguel de máquinas e equipamentos para construção sem operador, com atuação complementar em serviços de apoio a obras.</p>
+        <p>A empresa atende construtoras, prestadores de serviços e profissionais liberais em Fortaleza e região metropolitana, oferecendo comunicação direta e atendimento voltado para a realidade de cada obra.</p>
       </div>
-
-      <div class="stats-grid">
-        {companyHighlights.map((item) => (
-          <div class="stat-card">
-            <strong>{item.value}</strong>
-            <span>{item.label}</span>
-          </div>
-        ))}
+      <div>
+        <h2>Dados institucionais</h2>
+        <dl class="facts">{facts.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
       </div>
     </div>
   </section>
 
   <CTASection
-    title="Quer falar com a Solução Rental?"
-    text="Use o WhatsApp para pedir informações, confirmar atendimento e iniciar um orçamento."
+    title="Quer conversar com a Solução Rental?"
+    text="Use nosso WhatsApp para pedir mais informações, confirmar disponibilidade ou iniciar um orçamento."
     primaryHref="/contato"
     primaryLabel="Entrar em contato"
     secondaryHref={`https://wa.me/${site.whatsapp}`}

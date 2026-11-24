@@ -1,0 +1,40 @@
+---
+---
+
+<form class="area" action="/contato" method="get" data-area>
+  <div class="field-row">
+    <div class="field">
+      <label for="perimetro">Comprimento das fachadas (m)</label>
+      <input id="perimetro" type="number" inputmode="decimal" min="0.1" step="any" required autocomplete="off" aria-describedby="perimetro-ajuda" />
+      <p class="field-help" id="perimetro-ajuda">Some todos os lados que receberão tela.</p>
+    </div>
+    <div class="field">
+      <label for="altura">Altura a cobrir (m)</label>
+      <input id="altura" type="number" inputmode="decimal" min="0.1" step="any" required autocomplete="off" />
+    </div>
+  </div>
+  <p class="area-result" role="status"><span>Área aproximada</span><output for="perimetro altura" data-result>Preencha as medidas</output></p>
+  <p class="field-help">Cálculo simples de comprimento por altura, sem sobreposições e perdas. A equipe confirma a quantidade no orçamento.</p>
+  <input type="hidden" name="item" value="Telas fachadeiras" />
+  <button class="btn btn-action" type="submit">Solicitar orçamento com estas medidas</button>
+</form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-area]');
+  if (form) {
+    const length = form.querySelector<HTMLInputElement>('#perimetro')!;
+    const height = form.querySelector<HTMLInputElement>('#altura')!;
+    const result = form.querySelector<HTMLOutputElement>('[data-result]')!;
+    const item = form.querySelector<HTMLInputElement>('[name=item]')!;
+    const format = (value: number) => value.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
+    const update = () => {
+      const l = length.valueAsNumber;
+      const h = height.valueAsNumber;
+      const valid = l > 0 && h > 0;
+      result.textContent = valid ? `${format(l * h)} m²` : 'Preencha as medidas';
+      item.value = valid ? `Telas fachadeiras, cerca de ${format(l * h)} m² (${format(l)} m de fachada por ${format(h)} m de altura)` : 'Telas fachadeiras';
+    };
+    form.addEventListener('input', update);
+    window.addEventListener('pageshow', update);
+  }
+</script>

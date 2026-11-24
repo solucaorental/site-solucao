@@ -1,0 +1,154 @@
+{
+  "site": {
+    "name": "Solução Rental",
+    "legalName": "SOLUCAO RENTAL LTDA - ME",
+    "phone": "(85) 9 8944-3666",
+    "whatsapp": "5585989443666",
+    "whatsappLabel": "(85) 98944-3666",
+    "email": "comercial@solucaoloc.com.br",
+    "salesEmail": "",
+    "city": "Fortaleza - CE",
+    "address": "R. Martins de Lima, 200 - Parque Pres. Vargas, Fortaleza - CE, 60765-725, Brasil",
+    "description": "Empresa sediada em Fortaleza/CE, especializada em locação de máquinas e equipamentos para construção civil e fornecimento de telas fachadeiras para obras.",
+    "heroText": "Equipamentos para construção civil, telas fachadeiras e atendimento qualificado para sua obra em Fortaleza e região.",
+    "instagram": "",
+    "cnpj": "17.264.015/0001-60",
+    "foundationDate": "05/12/2012",
+    "status": "Ativa",
+    "legalNature": "206 | Sociedade Empresária Limitada",
+    "branchType": "Matriz",
+    "developer": {
+      "name": "Riandte",
+      "whatsapp": "5585988892958",
+      "whatsappMessage": "Olá! Vi um site que você desenvolveu e gostaria de um orçamento para o meu negócio."
+    }
+  },
+  "navItems": [
+    { "href": "/", "label": "Home" },
+    { "href": "/locacao", "label": "Locação" },
+    { "href": "/telas", "label": "Telas" },
+    { "href": "/portfolio", "label": "Serviços" },
+    { "href": "/quem-somos", "label": "Quem Somos" },
+    { "href": "/blog", "label": "Blog" },
+    { "href": "/contato", "label": "Contato" }
+  ],
+  "services": [
+    {
+      "title": "Locação de Equipamentos",
+      "description": "Atividade principal da empresa, com foco em máquinas e equipamentos para construção sem operador.",
+      "href": "/locacao",
+      "icon": "grid"
+    },
+    {
+      "title": "Telas Fachadeiras",
+      "description": "Fornecimento de telas fachadeiras para obras, com foco em proteção e organização do canteiro.",
+      "href": "/telas",
+      "icon": "shield"
+    },
+    {
+      "title": "Atendimento para Obras",
+      "description": "Apoio comercial para locação, telas fachadeiras e demandas operacionais em Fortaleza e região.",
+      "href": "/contato",
+      "icon": "truck"
+    }
+  ],
+  "equipment": [
+    {
+      "title": "Andaimes",
+      "category": "Acesso e escoramento",
+      "description": "Andaimes tubulares e fachadeiros de alta resistência e montagem eficiente."
+    },
+    {
+      "title": "Escoras Metálicas",
+      "category": "Acesso e escoramento",
+      "description": "Escoras ajustáveis para lajes e vigas com segurança no escoramento."
+    },
+    {
+      "title": "Betoneiras",
+      "category": "Concreto",
+      "description": "Betoneiras de 400L elétricas ou a diesel para mistura de concreto."
+    },
+    {
+      "title": "Máquinas de Solda",
+      "category": "Solda e tubulação",
+      "description": "Inversoras de solda portáteis e robustas para serviços de serralheria."
+    },
+    {
+      "title": "Rosqueadeiras",
+      "category": "Solda e tubulação",
+      "description": "Soluções para tubos galvanizados e conduítes em instalações hidráulicas."
+    },
+    {
+      "title": "Vibradores para Concreto",
+      "category": "Concreto",
+      "description": "Essenciais para garantir densidade e resistência do concreto armado."
+    },
+    {
+      "title": "Martelo Rompedor",
+      "category": "Demolição",
+      "description": "Demolição e quebra de concreto, pisos e estruturas com alto desempenho."
+    },
+    {
+      "title": "Perfil Metálico \"I\"",
+      "category": "Acesso e escoramento",
+      "description": "Vigas metálicas para estruturação e suporte de grandes cargas."
+    }
+  ],
+  "portfolioItems": [
+    { "title": "Locação de Equipamentos", "subtitle": "Máquinas e equipamentos para obras de pequeno, médio e grande porte." },
+    { "title": "Telas Fachadeiras", "subtitle": "Fornecimento e apoio para instalação de telas fachadeiras em canteiros de obra." },
+    { "title": "Obras Civis", "subtitle": "Atuação complementar em construção de edifícios e estruturas metálicas." }
+  ],
+  "blogPosts": [
+    {
+      "date": "10 Jul 2026",
+      "title": "Quando vale mais a pena alugar equipamentos para construção",
+      "excerpt": "Entenda quando a locação é mais vantajosa do que a compra para o cronograma da sua obra."
+    },
+    {
+      "date": "10 Jul 2026",
+      "title": "A importância da manutenção de equipamentos para a obra",
+      "excerpt": "Veja como a manutenção preventiva ajuda a evitar paradas e reduzir custos durante a execução."
+    },
+    {
+      "date": "10 Jul 2026",
+      "title": "Como organizar o canteiro para mais produtividade",
+      "excerpt": "Dicas práticas para estruturar melhor sua obra e contar com o apoio certo em equipamentos e telas."
+    }
+  ],
+  "companyHighlights": [
+    { "value": "Desde 2012", "label": "No mercado da construção" },
+    { "value": "Fortaleza/CE", "label": "Sede e atendimento local" },
+    { "value": "Matriz", "label": "CNPJ ativo e regularizado" }
+  ],
+  "telasFeatures": [
+    "Ideal para proteção e organização de fachadas em obras",
+    "Atendimento para diferentes portes e etapas de construção",
+    "Apoio comercial direto para consulta e disponibilidade",
+    "Pedido de orçamento simplificado via WhatsApp"
+  ],
+  "telasBenefits": [
+    "Contribui para a organização visual e segurança do canteiro",
+    "Atendimento em Fortaleza e região metropolitana",
+    "Resposta comercial rápida para demanda imediata",
+    "Canal direto com a equipe para alinhamentos técnicos"
+  ],
+  "diferenciais": [
+    {
+      "title": "Atendimento Local",
+      "description": "Base em Fortaleza para oferecer suporte próximo e ágil a obras e empresas da região."
+    },
+    {
+      "title": "Operação Consolidada",
+      "description": "Empresa com histórico de atuação formalizada e foco no setor da construção civil."
+    },
+    {
+      "title": "Variedade de Soluções",
+      "description": "Combina locação de equipamentos, telas fachadeiras e serviços complementares para obra."
+    },
+    {
+      "title": "Comunicação Direta",
+      "description": "Contato por WhatsApp para orçamentos rápidos e atendimento sem burocracia."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+---
+const steps = [
+  ['Envie o pedido', 'Informe os itens, a quantidade e o prazo pelo site ou WhatsApp.'],
+  ['Alinhe com a equipe', 'O atendimento tira dúvidas e entende a necessidade da obra.'],
+  ['Receba o orçamento', 'A equipe confirma disponibilidade, prazo e valores.'],
+  ['Feche a contratação', 'Combine as condições diretamente com quem atendeu você.']
+];
+---
+
+<ol class="steps">
+  {steps.map(([title, text]) => <li><h3>{title}</h3><p>{text}</p></li>)}
+</ol>

@@ -1,0 +1,67 @@
+---
+interface Props {
+  toggle?: boolean;
+}
+
+const { toggle = false } = Astro.props;
+const floors = [0, 1, 2, 3, 4];
+const bays = [0, 1, 2, 3];
+const W = 200;
+const F = 62;
+const H = F * floors.length;
+const faces = [
+  { name: 'left', t: 'matrix(.866 .5 0 1 40 130)' },
+  { name: 'right', t: 'matrix(.866 -.5 0 1 213.2 230)' }
+];
+const label = 'Edifício de cinco pavimentos com andaime; a tela cobre as duas fachadas e é amarrada à estrutura';
+---
+
+<figure class="facade">
+  {toggle && (
+    <fieldset class="facade-toggle">
+      <legend class="sr-only">Comparar fachada</legend>
+      <label><input type="radio" name="fachada" value="com" checked autocomplete="off" /><span>Com tela</span></label>
+      <label><input type="radio" name="fachada" value="sem" autocomplete="off" /><span>Sem tela</span></label>
+    </fieldset>
+  )}
+  <svg viewBox="20 12 387 548" role="img" aria-label={label}>
+    <path d="M40 130L213.2 30l173.2 100-173.2 100z" fill="#dbe3ec" stroke="#7c8894" />
+    <path d="M100 130l113-65 113 65-113 65z" fill="#c9d4e0" />
+    {faces.map((face) => (
+      <g transform={face.t}>
+        <rect width={W} height={H} fill={face.name === 'left' ? '#e9eef3' : '#cfd9e4'} />
+        {floors.map((f) => (
+          <Fragment>
+            <rect y={f * F} width={W} height="7" fill={face.name === 'left' ? '#c3cfdb' : '#aebdcd'} />
+            {[0, 1, 2].map((w) => <rect x={18 + w * 60} y={f * F + 18} width="42" height="32" fill={face.name === 'left' ? '#8799ab' : '#6f8396'} />)}
+          </Fragment>
+        ))}
+        <g stroke="#4c5864" stroke-width="2" fill="none">
+          {[0, 1, 2, 3, 4].map((p) => <path d={`M${p * 50} -14V${H}`} />)}
+          {floors.map((f) => <path d={`M0 ${f * F + 1}H${W}M0 ${f * F + 24}H${W}`} />)}
+          {floors.map((f) => <path d={`M${(f % 4) * 50} ${f * F + F}l50 -${F}`} />)}
+        </g>
+        <g class="mesh">
+          {bays.map((b) => (
+            <g>
+              <rect x={b * 50} y="-8" width="50" height={H - F + 8} fill="#235d9c" fill-opacity={face.name === 'left' ? 0.72 : 0.86} />
+              <path
+                d={Array.from({ length: 6 }, (_, i) => `M${b * 50 + (i + 1) * 7.1} -8V${H - F}`).join('') + Array.from({ length: 34 }, (_, i) => `M${b * 50} ${i * 7.4}h50`).join('')}
+                stroke="#fff" stroke-opacity=".28" stroke-width=".7" fill="none"
+              />
+              <path d={`M${b * 50} -8V${H - F}`} stroke="#18426f" stroke-width="1.5" />
+            </g>
+          ))}
+          {floors.slice(0, 5).map((f) => [0, 1, 2, 3, 4].map((p) => <circle cx={p * 50} cy={f * F - 2} r="3.2" fill="#f27535" />))}
+        </g>
+      </g>
+    ))}
+    <path d="M20 528.5l20-11.5 173.2 100L406 505" fill="none" stroke="#7c8894" transform="translate(0 -77)" />
+  </svg>
+  {toggle && (
+    <figcaption>
+      <span class="when-on">A tela envolve o andaime e é amarrada à estrutura nos pontos em laranja.</span>
+      <span class="when-off">Sem tela, o andaime e a fachada ficam expostos para a rua e os vizinhos.</span>
+    </figcaption>
+  )}
+</figure>

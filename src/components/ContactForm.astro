@@ -5,44 +5,112 @@ import { site } from '../data/site';
 <form class="contact-form" id="contact-form">
   <div class="field">
     <label for="nome">Nome completo</label>
-    <input id="nome" name="nome" type="text" required />
+    <input id="nome" name="nome" type="text" autocomplete="name" required aria-describedby="nome-erro" />
+    <p class="field-error" id="nome-erro" hidden></p>
   </div>
-  <div class="field">
-    <label for="email">E-mail</label>
-    <input id="email" name="email" type="email" required />
-  </div>
-  <div class="field">
-    <label for="telefone">Telefone / WhatsApp</label>
-    <input id="telefone" name="telefone" type="tel" required />
+  <div class="field-row">
+    <div class="field">
+      <label for="telefone">Telefone / WhatsApp</label>
+      <input id="telefone" name="telefone" type="tel" autocomplete="tel" required aria-describedby="telefone-erro" />
+      <p class="field-error" id="telefone-erro" hidden></p>
+    </div>
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-erro" />
+      <p class="field-error" id="email-erro" hidden></p>
+    </div>
   </div>
   <div class="field">
     <label for="mensagem">Mensagem / Equipamento de interesse</label>
-    <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+    <textarea id="mensagem" name="mensagem" rows="6" required aria-describedby="mensagem-erro"></textarea>
+    <p class="field-error" id="mensagem-erro" hidden></p>
   </div>
-  <button class="btn btn-primary" type="submit">Enviar pelo WhatsApp</button>
+  <button class="btn btn-action" type="submit">Enviar pelo WhatsApp</button>
+  <div class="notice" role="status" data-notice></div>
 </form>
 
 <script is:inline define:vars={{ whatsapp: site.whatsapp }}>
   const form = document.getElementById('contact-form');
 
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
+  if (form) {
+    const fields = [...form.querySelectorAll('input, textarea')];
+    const button = form.querySelector('button[type=submit]');
+    const notice = form.querySelector('[data-notice]');
+    const label = button.textContent;
+    const missing = {
+      nome: 'Informe seu nome.',
+      telefone: 'Informe um telefone para retorno.',
+      email: 'Informe seu e-mail.',
+      mensagem: 'Descreva o que você precisa.'
+    };
 
-    const formData = new FormData(form);
-    const nome = String(formData.get('nome') || '');
-    const email = String(formData.get('email') || '');
-    const telefone = String(formData.get('telefone') || '');
-    const mensagem = String(formData.get('mensagem') || '');
+    const items = new URLSearchParams(location.search).getAll('item');
+    const prazo = new URLSearchParams(location.search).get('prazo');
+    const message = form.elements.namedItem('mensagem');
+    if (items.length && !message.value) {
+      message.value = 'Tenho interesse em:\n' + items.map((item) => `- ${item}`).join('\n') + (prazo ? `\nPrazo de locação: ${prazo}` : '') + '\n';
+    }
 
-    const text = [
-      'Olá, vim pelo site da Solução Rental LTDA - ME.',
-      '',
-      `Nome: ${nome}`,
-      `E-mail: ${email}`,
-      `Telefone: ${telefone}`,
-      `Mensagem: ${mensagem}`
-    ].join('\n');
+    const validate = (field) => {
+      const error = document.getElementById(`${field.id}-erro`);
+      const valid = field.validity.valid;
+      field.setAttribute('aria-invalid', String(!valid));
+      error.hidden = valid;
+      error.textContent = valid ? '' : field.validity.valueMissing ? missing[field.name] : 'Use um e-mail no formato nome@empresa.com.br.';
+      return valid;
+    };
 
-    window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
-  });
+    // Com JavaScript, as mensagens próprias substituem a validação nativa.
+    form.noValidate = true;
+    fields.forEach((field) => field.addEventListener('input', () => {
+      if (field.getAttribute('aria-invalid') === 'true') validate(field);
+    }));
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      notice.className = 'notice';
+      notice.replaceChildren();
+
+      const invalid = fields.filter((field) => !validate(field));
+      if (invalid.length) {
+        notice.classList.add('notice--error');
+        notice.textContent = 'Corrija os campos destacados para enviar.';
+        invalid[0].focus();
+        return;
+      }
+
+      const formData = new FormData(form);
+      const nome = String(formData.get('nome') || '');
+      const email = String(formData.get('email') || '');
+      const telefone = String(formData.get('telefone') || '');
+      const mensagem = String(formData.get('mensagem') || '');
+
+      const text = [
+        'Olá, vim pelo site da Solução Rental LTDA - ME.',
+        '',
+        `Nome: ${nome}`,
+        `E-mail: ${email}`,
+        `Telefone: ${telefone}`,
+        `Mensagem: ${mensagem}`
+      ].join('\n');
+
+      const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+
+      // Evita abrir duas conversas com um clique duplo.
+      button.disabled = true;
+      button.textContent = 'Abrindo WhatsApp…';
+      setTimeout(() => {
+        button.disabled = false;
+        button.textContent = label;
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'abra a conversa';
+        notice.classList.add('notice--success');
+        notice.append('Mensagem pronta. Conclua o envio no WhatsApp. Se ele não abriu, ', link, '.');
+      }, 1200);
+    });
+  }
 </script>

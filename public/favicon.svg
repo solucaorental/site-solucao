@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Solução Rental">
-  <rect width="64" height="64" rx="16" fill="#1a3c61"/>
-  <path d="M18 40c6 8 22 8 28-2 5-8 1-18-8-22-10-5-22 1-24 12h10c2-4 6-6 10-4 4 2 5 7 2 11-4 5-12 4-16-2z" fill="#f1742d"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1555 65 441 441" role="img" aria-label="Solução">
+  <path fill="#f27535" d="M1603 162l172-93v125l-152 31zM1630 247l78-12v102l-53-9zM1663 354l112 24v124l-79-43z"/>
+  <path fill="#235d9c" d="M1775 69l172 93v68l-172-36zM1842 235l105 17v67l-105 18zM1775 378l172-36v67l-172 93z"/>
 </svg>

@@ -1,49 +1,70 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import PortfolioCard from '../components/PortfolioCard.astro';
+import PageHead from '../components/PageHead.astro';
+import Facade from '../components/Facade.astro';
+import EquipmentDrawing from '../components/EquipmentDrawing.astro';
+import Steps from '../components/Steps.astro';
 import CTASection from '../components/CTASection.astro';
-import { portfolioItems, site } from '../data/site';
+import { equipment, portfolioItems, services, site, telasFeatures } from '../data/site';
+
+const slug = (title: string) => title.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const items = portfolioItems.map((item) => {
+  const href = services.find((service) => service.title === item.title)?.href;
+  return { ...item, href, id: slug(item.title), quote: `/contato?item=${encodeURIComponent(item.title)}` };
+});
 ---
 
 <BaseLayout
   title="Serviços | Solução Rental"
-  description="Visão resumida das linhas de serviço e atuação da Solução Rental."
+  description="Linhas de serviço e atuação da Solução Rental no mercado da construção civil."
   pathname="/portfolio"
 >
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-panel">
-        <span class="eyebrow">Serviços</span>
-        <h1>Frentes de serviço apresentadas no site</h1>
-        <p>Em vez de listar obras específicas sem base confirmada, esta seção apresenta as linhas de serviço associadas à empresa.</p>
+  <PageHead title="Serviços" text="Locação, telas fachadeiras e serviços complementares para obras, construtoras e profissionais da construção civil.">
+    <nav class="jump-nav" aria-label="Serviços nesta página">
+      {items.map((item) => <a href={`#${item.id}`}>{item.title}</a>)}
+    </nav>
+  </PageHead>
+
+  {items.map((item, index) => (
+    <section class:list={['service-block', index % 2 === 1 && 'service-block--flip']} id={item.id} aria-labelledby={`${item.id}-titulo`}>
+      <div class="container service-block-inner">
+        <div class="service-block-copy">
+          <h2 id={`${item.id}-titulo`}>{item.title}</h2>
+          <p class="service-block-text">{item.subtitle}</p>
+          {item.href === '/locacao' && (
+            <ul class="mini-catalog">
+              {equipment.map((piece) => <li><EquipmentDrawing title={piece.title} /><span>{piece.title}</span></li>)}
+            </ul>
+          )}
+          {item.href === '/telas' && <ul class="rule-list">{telasFeatures.slice(0, 3).map((feature) => <li>{feature}</li>)}</ul>}
+          {!item.href && <p>Conte o que precisa ser executado e em que etapa a obra está. A equipe avalia a demanda e orienta os próximos passos.</p>}
+          <div class="actions">
+            <a class="btn btn-action" href={item.href === '/locacao' ? '/locacao' : item.quote}>{item.href === '/locacao' ? 'Montar lista de orçamento' : 'Solicitar orçamento'}</a>
+            {item.href === '/telas' && <a class="btn btn-outline" href="/telas">Ver telas fachadeiras</a>}
+          </div>
+        </div>
+        <div class="service-block-media">
+          {item.href === '/telas'
+            ? <Facade />
+            : <img src={item.href === '/locacao' ? '/images/andaime.webp' : '/images/escoras.webp'} alt={item.href === '/locacao' ? 'Equipe trabalhando sobre andaime tubular' : 'Profissional ajustando escora metálica sob uma laje'} width="1290" height="768" loading={index ? 'lazy' : 'eager'} />}
+        </div>
       </div>
-      <div class="highlight-surface">
-        <h3>Apresentação institucional</h3>
-        <p>A estrutura foi ajustada para comunicar locação, manutenção e apoio à construção com mais clareza.</p>
-      </div>
-    </div>
-  </section>
+    </section>
+  ))}
 
   <section class="section">
     <div class="container">
-      <SectionHeading
-        eyebrow="Linhas de serviço"
-        title="Onde a empresa atua"
-        text="Resumo de serviços com base nas atividades informadas para a Solução Rental."
-      />
-      <div class="portfolio-grid">
-        {portfolioItems.map((item) => <PortfolioCard {...item} />)}
-      </div>
+      <h2>Como contratar</h2>
+      <Steps />
     </div>
   </section>
 
   <CTASection
-    title="Precisa de atendimento para sua obra ou operação?"
-    text="Converse com a empresa e alinhe o tipo de serviço ou locação que você precisa."
+    title="Precisa de uma solução para sua obra?"
+    text="Converse com nossa equipe e receba orientação sobre o serviço ideal para sua demanda."
     primaryHref="/contato"
-    primaryLabel="Solicitar proposta"
+    primaryLabel="Solicitar orçamento"
     secondaryHref={`https://wa.me/${site.whatsapp}`}
-    secondaryLabel="Abrir WhatsApp"
+    secondaryLabel="Falar no WhatsApp"
   />
 </BaseLayout>

@@ -1,49 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import BlogCard from '../components/BlogCard.astro';
+import PageHead from '../components/PageHead.astro';
 import CTASection from '../components/CTASection.astro';
 import { blogPosts, site } from '../data/site';
 ---
 
 <BaseLayout
-  title="Conteúdo | Solução Rental"
-  description="Conteúdo institucional e informativo sobre locação e operação na construção."
+  title="Blog | Solução Rental"
+  description="Conteúdo sobre construção civil, locação de equipamentos e organização de obra."
   pathname="/blog"
 >
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-panel">
-        <span class="eyebrow">Conteúdo</span>
-        <h1>Informações úteis sobre locação e operação na construção</h1>
-        <p>Esta área foi adaptada para apoiar a apresentação institucional da empresa com temas próximos da sua atuação.</p>
-      </div>
-      <div class="highlight-surface">
-        <h3>Base pronta para evolução</h3>
-        <p>Os textos atuais funcionam como apoio comercial e podem crescer depois para uma área editorial mais completa.</p>
-      </div>
-    </div>
-  </section>
+  <PageHead title="Conteúdo útil para sua obra" text="Temas práticos sobre locação de equipamentos, organização de canteiro e produtividade na construção civil." />
 
   <section class="section">
     <div class="container">
-      <SectionHeading
-        eyebrow="Conteúdo"
-        title="Leituras em destaque"
-        text="Assuntos que ajudam clientes e parceiros a tomar decisões melhores sobre locação e operação de obra."
-      />
-      <div class="blog-grid">
-        {blogPosts.map((post) => <BlogCard {...post} />)}
-      </div>
+      <h2 class="sr-only">Artigos</h2>
+      {blogPosts.length > 0 ? (
+        <div class="rows">
+          {blogPosts.map((post) => (
+            <article class="row row--post">
+              <p class="row-meta">{post.date}</p>
+              <div><h3>{post.title}</h3><p>{post.excerpt}</p></div>
+              <a class="text-link" href="/contato">Falar com a equipe<span class="sr-only"> sobre: {post.title}</span></a>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="empty">
+          <h3>Nenhum artigo publicado</h3>
+          <p>Para dúvidas sobre equipamentos ou telas, fale com a equipe.</p>
+          <a class="btn btn-outline" href="/contato">Falar com a equipe</a>
+        </div>
+      )}
     </div>
   </section>
 
   <CTASection
-    title="Quer atendimento direto em vez de continuar pesquisando?"
-    text="A empresa pode orientar rapidamente qual atendimento inicial faz mais sentido para sua demanda."
+    title="Quer falar diretamente com a equipe?"
+    text="Use o WhatsApp para pedir um orçamento ou tirar dúvidas sobre equipamentos e telas fachadeiras."
     primaryHref="/contato"
-    primaryLabel="Pedir atendimento"
+    primaryLabel="Entrar em contato"
     secondaryHref={`https://wa.me/${site.whatsapp}`}
-    secondaryLabel="WhatsApp"
+    secondaryLabel="Falar no WhatsApp"
   />
 </BaseLayout>

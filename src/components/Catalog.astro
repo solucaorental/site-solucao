@@ -1,0 +1,150 @@
+---
+import { equipment } from '../data/site';
+import EquipmentDrawing from './EquipmentDrawing.astro';
+
+const categories = [...new Set(equipment.map((item) => item.category))];
+---
+
+<form class="catalog" action="/contato" method="get" data-catalog>
+  <div class="catalog-main">
+    <div class="catalog-tools">
+      <div class="field">
+        <label for="catalog-search">Buscar equipamento</label>
+        <input id="catalog-search" type="search" autocomplete="off" placeholder="Ex.: betoneira" />
+      </div>
+      <div class="filters" role="group" aria-label="Filtrar por categoria">
+        <button type="button" class="filter" data-category="" aria-pressed="true">Todos</button>
+        {categories.map((category) => (
+          <button type="button" class="filter" data-category={category} aria-pressed="false">{category}</button>
+        ))}
+      </div>
+    </div>
+
+    <p class="catalog-count" role="status" data-count>{equipment.length} equipamentos</p>
+
+    {categories.map((category) => (
+      <section class="catalog-group" data-group>
+        <h2>{category}</h2>
+        <ul>
+          {equipment.filter((item) => item.category === category).map((item) => (
+            <li class="equipment" data-row data-category={category} data-text={`${item.title} ${item.description} ${category}`}>
+              <div class="equipment-figure"><EquipmentDrawing title={item.title} /></div>
+              <div class="equipment-body">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <label class="check">
+                  <input type="checkbox" name="item" value={item.title} autocomplete="off" />
+                  <span><span class="check-off">Incluir no orçamento</span><span class="check-on">Incluído</span><span class="sr-only">: {item.title}</span></span>
+                </label>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <div class="empty" data-empty hidden>
+      <h3>Nenhum equipamento encontrado</h3>
+      <p>Limpe a busca ou pergunte à equipe: o item pode estar disponível.</p>
+      <div class="actions">
+        <button class="btn btn-outline" type="button" data-reset>Limpar filtros</button>
+        <a class="btn btn-text" href="/contato">Falar com a equipe</a>
+      </div>
+    </div>
+  </div>
+
+  <aside class="quote" id="lista" aria-labelledby="lista-titulo" tabindex="-1">
+    <h2 id="lista-titulo">Lista de orçamento</h2>
+    <p class="quote-empty" data-quote-empty>Inclua equipamentos do catálogo para montar seu pedido.</p>
+    <ul class="quote-list" data-quote-list></ul>
+    <div class="field">
+      <label for="prazo">Prazo de locação</label>
+      <select id="prazo" name="prazo" autocomplete="off">
+        <option value="">A definir</option>
+        <option>Até 1 semana</option>
+        <option>De 1 a 4 semanas</option>
+        <option>De 1 a 3 meses</option>
+        <option>Mais de 3 meses</option>
+      </select>
+    </div>
+    <button class="btn btn-action" type="submit">Solicitar orçamento</button>
+    <p class="sr-only" role="status" data-selected></p>
+  </aside>
+
+  <a class="quote-jump" href="#lista" data-jump hidden></a>
+</form>
+
+<script>
+  const root = document.querySelector<HTMLFormElement>('[data-catalog]');
+  if (root) {
+    const get = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector)!;
+    const search = get<HTMLInputElement>('#catalog-search');
+    const list = get('[data-quote-list]');
+    const rows = [...root.querySelectorAll<HTMLElement>('[data-row]')];
+    const filters = [...root.querySelectorAll<HTMLButtonElement>('.filter')];
+    const boxes = [...root.querySelectorAll<HTMLInputElement>('input[name=item]')];
+    const amounts = new Map<string, string>();
+    const normalize = (value: string) => value.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+    let category = '';
+
+    const filter = () => {
+      const term = normalize(search.value);
+      let count = 0;
+      rows.forEach((row) => {
+        const visible = (!category || row.dataset.category === category) && normalize(row.dataset.text || '').includes(term);
+        row.hidden = !visible;
+        if (visible) count += 1;
+      });
+      root.querySelectorAll<HTMLElement>('[data-group]').forEach((group) => {
+        group.hidden = !group.querySelector('[data-row]:not([hidden])');
+      });
+      filters.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.category === category)));
+      get('[data-count]').textContent = count === 1 ? '1 equipamento' : `${count} equipamentos`;
+      get('[data-empty]').hidden = count > 0;
+    };
+
+    const render = () => {
+      const chosen = boxes.filter((box) => box.checked);
+      const total = `${chosen.length} ${chosen.length === 1 ? 'item' : 'itens'} na lista`;
+      list.replaceChildren(...chosen.map((box) => {
+        const row = document.createElement('li');
+        const name = document.createElement('span');
+        name.textContent = box.value;
+        const amount = document.createElement('input');
+        Object.assign(amount, { type: 'number', min: '1', max: '9999', step: '1', required: true, value: amounts.get(box.value) || '1' });
+        amount.setAttribute('aria-label', `Quantidade de ${box.value}`);
+        amount.addEventListener('input', () => amounts.set(box.value, amount.value));
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.textContent = 'Remover';
+        remove.setAttribute('aria-label', `Remover ${box.value}`);
+        remove.addEventListener('click', () => { box.checked = false; amounts.delete(box.value); render(); get('#lista').focus(); });
+        row.append(name, amount, remove);
+        return row;
+      }));
+      get('[data-quote-empty]').hidden = chosen.length > 0;
+      get('[data-selected]').textContent = chosen.length ? total : '';
+      const jump = get('[data-jump]');
+      jump.hidden = chosen.length === 0;
+      jump.textContent = `${total}. Revisar pedido`;
+      document.documentElement.classList.toggle('has-selection', chosen.length > 0);
+    };
+
+    root.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const params = new URLSearchParams();
+      boxes.filter((box) => box.checked).forEach((box) => params.append('item', `${box.value} (quantidade: ${amounts.get(box.value) || '1'})`));
+      const term = get<HTMLSelectElement>('#prazo').value;
+      if (term) params.set('prazo', term);
+      const query = params.toString();
+      window.location.href = query ? `/contato?${query}` : '/contato';
+    });
+    search.addEventListener('input', filter);
+    search.addEventListener('keydown', (event) => { if (event.key === 'Enter') event.preventDefault(); });
+    filters.forEach((button) => button.addEventListener('click', () => { category = button.dataset.category || ''; filter(); }));
+    boxes.forEach((box) => box.addEventListener('change', render));
+    get('[data-reset]').addEventListener('click', () => { search.value = ''; category = ''; filter(); search.focus(); });
+    new IntersectionObserver(([entry]) => get('[data-jump]').classList.toggle('is-redundant', entry.isIntersecting)).observe(get('#lista'));
+    window.addEventListener('pageshow', render);
+  }
+</script>

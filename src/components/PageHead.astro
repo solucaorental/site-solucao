@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const { title, text, image, imageAlt = '' } = Astro.props;
+---
+
+<section class:list={['page-head', image && 'page-head--media']}>
+  <div class="container page-head-inner">
+    <div class="page-head-copy">
+      <h1>{title}</h1>
+      <p>{text}</p>
+      <slot />
+    </div>
+  </div>
+  {image && <img class="page-head-media" src={image} alt={imageAlt} width="1290" height="768" />}
+</section>
